@@ -1,4 +1,4 @@
-# Beauty Hub - A Make Up Salon Management System
+# Beauty Sys - A Make Up Salon Management System
 
 Welcome to the Make Up Salon Management System project developed for the "Sociedade de Assistência aos Trabalhadores do Carvão" college work.
 
