@@ -1,4 +1,10 @@
+using Infra.Data.Context;
+using Microsoft.EntityFrameworkCore;
+
 var builder = WebApplication.CreateBuilder(args);
+
+// Allows both to access and to set up the config
+ConfigurationManager configuration = builder.Configuration;
 
 // Add services to the container.
 
@@ -7,6 +13,8 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+// Entity framework
+builder.Services.AddDbContext<ConfigContext>(options => options.UseSqlServer(builder.Configuration["BeautySysConnectionString"]));
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
