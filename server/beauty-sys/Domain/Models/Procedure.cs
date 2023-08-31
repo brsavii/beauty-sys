@@ -2,12 +2,12 @@
 
 namespace Domain.Models
 {
-    public class Employee : BaseModel
+    public class Procedure : BaseModel
     {
-        public int EmployeeId { get; set; }
+        public int ProcedureId { get; set; }
         public required string Name { get; set; }
-        public required string Office { get; set; }
-        public required string Cpf { get; set; }
+        public decimal Value { get; set; }
         public virtual required ICollection<EmployeeProcedure> EmployeeProcedures { get; set; }
+
     }
 }

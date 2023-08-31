@@ -4,6 +4,7 @@ using Infra.Data.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Infra.Data.Migrations
 {
     [DbContext(typeof(ConfigContext))]
-    partial class ConfigContextModelSnapshot : ModelSnapshot
+    [Migration("20230831194255_CREATE_TABLE_EMPLOYEEPROCEDURE")]
+    partial class CREATE_TABLE_EMPLOYEEPROCEDURE
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -66,7 +69,6 @@ namespace Infra.Data.Migrations
 
                     b.Property<string>("Cpf")
                         .IsRequired()
-                        .HasMaxLength(11)
                         .HasColumnType("char(11)");
 
                     b.Property<DateTime>("InsertedAt")
@@ -87,36 +89,22 @@ namespace Infra.Data.Migrations
 
                     b.HasKey("EmployeeId");
 
-                    b.ToTable("Employees", (string)null);
+                    b.ToTable("Employee", (string)null);
                 });
 
-            modelBuilder.Entity("Domain.Models.EmployeeProcedure", b =>
+            modelBuilder.Entity("Domain.Models.EmployeesProcedure", b =>
                 {
-                    b.Property<int>("EmployeeProcedureId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("EmployeeProcedureId"));
-
                     b.Property<int>("EmployeeId")
                         .HasColumnType("int");
-
-                    b.Property<DateTime>("InsertedAt")
-                        .HasColumnType("datetime2");
 
                     b.Property<int>("ProcedureId")
                         .HasColumnType("int");
 
-                    b.Property<DateTime?>("UpdatedAt")
-                        .HasColumnType("datetime2");
-
-                    b.HasKey("EmployeeProcedureId");
-
-                    b.HasIndex("EmployeeId");
+                    b.HasKey("EmployeeId", "ProcedureId");
 
                     b.HasIndex("ProcedureId");
 
-                    b.ToTable("EmployeesProcedures", (string)null);
+                    b.ToTable("EmployeesProcedure");
                 });
 
             modelBuilder.Entity("Domain.Models.Procedure", b =>
@@ -144,36 +132,22 @@ namespace Infra.Data.Migrations
 
                     b.HasKey("ProcedureId");
 
-                    b.ToTable("Procedures", (string)null);
+                    b.ToTable("Procedure", (string)null);
                 });
 
-            modelBuilder.Entity("Domain.Models.EmployeeProcedure", b =>
+            modelBuilder.Entity("Domain.Models.EmployeesProcedure", b =>
                 {
-                    b.HasOne("Domain.Models.Employee", "Employee")
-                        .WithMany("EmployeeProcedures")
+                    b.HasOne("Domain.Models.Employee", null)
+                        .WithMany()
                         .HasForeignKey("EmployeeId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Domain.Models.Procedure", "Procedure")
-                        .WithMany("EmployeeProcedures")
+                    b.HasOne("Domain.Models.Procedure", null)
+                        .WithMany()
                         .HasForeignKey("ProcedureId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.Navigation("Employee");
-
-                    b.Navigation("Procedure");
-                });
-
-            modelBuilder.Entity("Domain.Models.Employee", b =>
-                {
-                    b.Navigation("EmployeeProcedures");
-                });
-
-            modelBuilder.Entity("Domain.Models.Procedure", b =>
-                {
-                    b.Navigation("EmployeeProcedures");
                 });
 #pragma warning restore 612, 618
         }

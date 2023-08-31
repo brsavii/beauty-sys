@@ -26,6 +26,9 @@ namespace Infra.Data.Mappings
 
             builder.Property(c => c.InsertedAt)
                 .IsRequired();
+
+            builder.Property(e => e.UpdatedAt)
+                .IsRequired(false);
         }
     }
 }

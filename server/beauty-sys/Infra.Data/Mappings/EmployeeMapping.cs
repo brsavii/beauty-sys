@@ -8,7 +8,7 @@ namespace Infra.Data.Mappings
     {
         public void Configure(EntityTypeBuilder<Employee> builder)
         {
-            builder.ToTable("Employee");
+            builder.ToTable("Employees");
 
             builder.HasKey(c => c.EmployeeId);
 
@@ -22,10 +22,14 @@ namespace Infra.Data.Mappings
 
             builder.Property(c => c.Cpf)
                 .IsRequired()
+                .HasMaxLength(11)
                 .HasColumnType("char(11)");
 
             builder.Property(c => c.InsertedAt)
                 .IsRequired();
+
+            builder.Property(e => e.UpdatedAt)
+                .IsRequired(false);
         }
     }
 }
