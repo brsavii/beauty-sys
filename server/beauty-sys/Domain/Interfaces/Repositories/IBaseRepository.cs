@@ -1,7 +1,8 @@
-﻿
-namespace Domain.Interfaces.Repositories
+﻿namespace Domain.Interfaces.Repositories
 {
-    public interface IBaseRepository
+    public interface IBaseRepository<T> where T : class
     {
+        Task<int> SaveAsync(T modelObject);
+        Task<int> UpdateAsync(T modelObject);
     }
 }
