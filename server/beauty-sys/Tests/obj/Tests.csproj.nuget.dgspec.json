@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\bruna\\source\\beauty-sys\\server\\beauty-sys\\Tests\\Tests.csproj": {}
+    "C:\\source\\beauty-sys\\server\\beauty-sys\\Tests\\Tests.csproj": {}
   },
   "projects": {
-    "C:\\Users\\bruna\\source\\beauty-sys\\server\\beauty-sys\\Tests\\Tests.csproj": {
+    "C:\\source\\beauty-sys\\server\\beauty-sys\\Tests\\Tests.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\bruna\\source\\beauty-sys\\server\\beauty-sys\\Tests\\Tests.csproj",
+        "projectUniqueName": "C:\\source\\beauty-sys\\server\\beauty-sys\\Tests\\Tests.csproj",
         "projectName": "Tests",
-        "projectPath": "C:\\Users\\bruna\\source\\beauty-sys\\server\\beauty-sys\\Tests\\Tests.csproj",
-        "packagesPath": "C:\\Users\\bruna\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\bruna\\source\\beauty-sys\\server\\beauty-sys\\Tests\\obj\\",
+        "projectPath": "C:\\source\\beauty-sys\\server\\beauty-sys\\Tests\\Tests.csproj",
+        "packagesPath": "C:\\Users\\user\\.nuget\\packages\\",
+        "outputPath": "C:\\source\\beauty-sys\\server\\beauty-sys\\Tests\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\bruna\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\user\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -55,7 +55,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.306\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.400\\RuntimeIdentifierGraph.json"
         }
       }
     }

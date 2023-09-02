@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "FkmEHRTeMNrpVxdhhJyiQHqCFAUqGu2UBtkonT9/2awB7VkXE2zbTarMSxVA73Xm3GYzGTTsGFUvLf3DUfUofw==",
+  "dgSpecHash": "TpuYhgA1OvUGcEWkx+LU+kkm6V72ma4GWIfG+gJSz3QJHBXSTPcM0EiOrLGBpsx1j/d+8cvwTS5RGmWwVJdJNg==",
   "success": true,
-  "projectFilePath": "C:\\Users\\bruna\\source\\beauty-sys\\server\\beauty-sys\\Tests\\Tests.csproj",
+  "projectFilePath": "C:\\source\\beauty-sys\\server\\beauty-sys\\Tests\\Tests.csproj",
   "expectedPackageFiles": [],
   "logs": []
 }
