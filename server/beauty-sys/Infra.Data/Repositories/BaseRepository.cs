@@ -14,7 +14,7 @@ namespace Infra.Data.Repositories
             _context = context;
             _typedContext = _context.Set<T>();
         }
-        
+
         public async Task<int> SaveAsync(T modelObject)
         {
             _typedContext.Add(modelObject);
