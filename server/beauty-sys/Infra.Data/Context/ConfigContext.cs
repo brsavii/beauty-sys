@@ -22,22 +22,6 @@ namespace Infra.Data.Context
             modelBuilder.ApplyConfiguration(new ProcedureMapping());
             modelBuilder.ApplyConfiguration(new EmployeeProcedureMapping());
 
-            modelBuilder.Entity<Employee>()
-                .HasMany(e => e.EmployeeProcedures)
-                .WithOne(e => e.Employee);
-
-            modelBuilder.Entity<Procedure>()
-                .HasMany(e => e.EmployeeProcedures)
-                .WithOne(e => e.Procedure);
-
-            modelBuilder.Entity<EmployeeProcedure>()
-                .HasOne(e => e.Procedure)
-                .WithMany(e => e.EmployeeProcedures);
-
-            modelBuilder.Entity<EmployeeProcedure>()
-                .HasOne(e => e.Employee)
-                .WithMany(e => e.EmployeeProcedures);
-
             base.OnModelCreating(modelBuilder);
         }
     }
