@@ -10,21 +10,25 @@ namespace Infra.Data.Mappings
         {
             builder.ToTable("Procedures");
 
-            builder.HasKey(e => e.ProcedureId);
+            builder.HasKey(p => p.ProcedureId);
 
-            builder.Property(e => e.Name)
+            builder.Property(p => p.Name)
                 .IsRequired()
                 .HasMaxLength(70);
 
-            builder.Property(e => e.Value)
+            builder.Property(p => p.Value)
                 .IsRequired()
                 .HasPrecision(4, 2);
 
-            builder.Property(e => e.InsertedAt)
+            builder.Property(p => p.InsertedAt)
                 .IsRequired();
 
-            builder.Property(e => e.UpdatedAt)
+            builder.Property(p => p.UpdatedAt)
                 .IsRequired(false);
+
+            builder.HasMany(p => p.Employees)
+                .WithMany(e => e.Procedures)
+                .UsingEntity<EmployeeProcedure>();
         }
     }
 }
