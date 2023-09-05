@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Infra.Data.Repositories
 {
-    public class BaseRepository<T> : IBaseRepository<T> where T : class
+    public class BaseRepository<T> : IBaseRepository<T>, IDisposable where T : class
     {
         private readonly ConfigContext _context;
         protected readonly DbSet<T> _typedContext;
@@ -24,6 +24,25 @@ namespace Infra.Data.Repositories
         {
             _typedContext.Update(modelObject);
             return await _context.SaveChangesAsync();
+        }
+
+        public T? GetById(int id)
+        {
+            return _typedContext.Find(id);
+        }
+
+        public void Delete(int id)
+        {
+            var objeto = GetById(id);
+            if (objeto != null)
+                _typedContext.Remove(objeto);
+
+            _context.SaveChanges();
+        }
+
+        public async void Dispose()
+        {
+            await _context.DisposeAsync();
         }
     }
 }
