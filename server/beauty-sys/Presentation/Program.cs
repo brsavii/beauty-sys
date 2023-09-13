@@ -1,3 +1,4 @@
+using Infra.CrossCutting;
 using Infra.Data.Context;
 using Microsoft.EntityFrameworkCore;
 
@@ -15,6 +16,10 @@ builder.Services.AddSwaggerGen();
 
 // Entity framework
 builder.Services.AddDbContext<ConfigContext>(options => options.UseSqlServer(builder.Configuration["BeautySysConnectionString"]));
+
+// Dependency Injector
+NativeInjector.RegisterServices(builder.Services);
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
