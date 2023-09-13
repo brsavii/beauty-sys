@@ -40,9 +40,6 @@ namespace Infra.Data.Repositories
             _context.SaveChanges();
         }
 
-        public async void Dispose()
-        {
-            await _context.DisposeAsync();
-        }
+        public async void Dispose() => await _context.DisposeAsync();
     }
 }
