@@ -1,5 +1,9 @@
 ﻿using Application.AppServices;
 using Application.Interfaces;
+using Domain.Interfaces.Repositories;
+using Domain.Interfaces.Services;
+using Domain.Services;
+using Infra.Data.Repositories;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Infra.CrossCutting
@@ -9,6 +13,10 @@ namespace Infra.CrossCutting
         public static void RegisterServices(IServiceCollection services)
         {
             services.AddScoped<ICustomerAppService, CustomerAppService>();
+
+            services.AddScoped<ICustomerService, CustomerService>();
+
+            services.AddScoped<ICustomerRepository, CustomerRepository>();
         }
     }
 }

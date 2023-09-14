@@ -26,18 +26,23 @@ namespace Infra.Data.Repositories
             return await _context.SaveChangesAsync();
         }
 
-        public T? GetById(int id)
+        public async Task<T?> GetById(int id)
         {
-            return _typedContext.Find(id);
+            return await _typedContext.FindAsync(id);
         }
 
-        public void Delete(int id)
+        public async Task Delete(int id)
         {
-            var objeto = GetById(id);
-            if (objeto != null)
-                _typedContext.Remove(objeto);
+            var modelObject = await GetById(id);
+            if (modelObject != null)
+                _typedContext.Remove(modelObject);
 
             _context.SaveChanges();
+        }
+
+        public async Task<List<T>> GetAllAsync()
+        {
+            return await _typedContext.ToListAsync();
         }
 
         public async void Dispose() => await _context.DisposeAsync();

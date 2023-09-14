@@ -2,9 +2,9 @@
 
 namespace Presentation.Utils.Base
 {
-    public record ReponseBase
+    internal record ReponseBase
     {
-        public static JsonResult DefaultResponse(bool success, string? message = null, object? objectData = null)
+        internal static JsonResult DefaultResponse(bool success, string? message = null, object? objectData = null)
         {
             return BigJson(new
             {
@@ -14,7 +14,7 @@ namespace Presentation.Utils.Base
             });
         }
 
-        public static JsonResult BigJson(object data)
+        internal static JsonResult BigJson(object data)
         {
             return new JsonResult(data);
         }

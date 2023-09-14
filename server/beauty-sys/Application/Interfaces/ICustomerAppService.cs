@@ -1,9 +1,6 @@
-﻿using Domain.Objects.Reponses;
-
-namespace Application.Interfaces
+﻿namespace Application.Interfaces
 {
     public interface ICustomerAppService
     {
-        Task<CustomerResponse> GetCustomers();
     }
 }

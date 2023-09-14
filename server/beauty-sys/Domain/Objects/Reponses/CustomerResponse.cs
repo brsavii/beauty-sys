@@ -2,8 +2,15 @@
 {
     public record CustomerResponse
     {
-        public required string Name { get; set; }
-        public required string Phone { get; set; }
-        public required string Description { get; set; }
+        public CustomerResponse(string _name, string _phone, string _description)
+        {
+            Name = _name;
+            Phone = _phone;
+            Description = _description;
+        }
+
+        public string Name { get; set; }
+        public string Phone { get; set; }
+        public string Description { get; set; }
     }
 }
