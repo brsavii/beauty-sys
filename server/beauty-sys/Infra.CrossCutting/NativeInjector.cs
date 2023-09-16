@@ -17,6 +17,10 @@ namespace Infra.CrossCutting
             services.AddScoped<ICustomerService, CustomerService>();
 
             services.AddScoped<ICustomerRepository, CustomerRepository>();
+
+            services.AddScoped<IEmployeeService, EmployeeService>();
+
+            services.AddScoped<IEmployeeRepository, EmployeeRepository>();
         }
     }
 }
