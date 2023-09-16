@@ -1,4 +1,6 @@
-﻿using Domain.Interfaces.Services;
+﻿using Application.Interfaces;
+using Domain.Interfaces.Services;
+using Domain.Objects.Requests;
 using Microsoft.AspNetCore.Mvc;
 using Presentation.Utils.Base;
 
@@ -9,10 +11,12 @@ namespace Presentation.Controllers
     public class CustomerController : ControllerBase
     {
         private readonly ICustomerService _customerService;
+        private readonly ICustomerAppService _customerAppService;
 
-        public CustomerController(ICustomerService customerService)
+        public CustomerController(ICustomerService customerService, ICustomerAppService customerAppService)
         {
             _customerService = customerService;
+            _customerAppService = customerAppService;
         }
 
         [HttpGet("GetCustomers")]
@@ -45,7 +49,7 @@ namespace Presentation.Controllers
             }
         }
 
-        [HttpDelete("DeleteCustomers")]
+        [HttpDelete("DeleteCustomer")]
         public async Task<JsonResult> DeleteCustomer(int id)
         {
             try
@@ -57,6 +61,36 @@ namespace Presentation.Controllers
             catch (Exception ex)
             {
                 return ReponseBase.DefaultResponse(false, $"Erro ao deletar cliente: {ex.Message}");
+            }
+        }
+
+        [HttpPatch("UpdateCustomer")]
+        public async Task<JsonResult> UpdateCustomer(int id, UpdateCustomerRequest updateCustomerRequest)
+        {
+            try
+            {
+                await _customerAppService.UpdateCustomer(id, updateCustomerRequest);
+
+                return ReponseBase.DefaultResponse(true, "Cliente deletado com sucesso");
+            }
+            catch (Exception ex)
+            {
+                return ReponseBase.DefaultResponse(false, $"Erro ao deletar cliente: {ex.Message}");
+            }
+        }
+
+        [HttpPost("CreateCustomer")]
+        public async Task<JsonResult> SaveCustomer([FromBody] CreateCustomerRequest createCustomerRequest)
+        {
+            try
+            {
+                await _customerService.CreateCustomer(createCustomerRequest);
+                return ReponseBase.DefaultResponse(true, "Cliente cadastrado com sucesso!");
+
+            }
+            catch (Exception ex)
+            {
+                return ReponseBase.DefaultResponse(false, $"Erro ao cadastrar novo cliente: {ex.Message}");
             }
         }
     }
