@@ -6,4 +6,13 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Compile Remove="Objects\Requests\NovaPasta1\**" />
+    <Compile Remove="Objects\Requests\NovaPasta\**" />
+    <EmbeddedResource Remove="Objects\Requests\NovaPasta1\**" />
+    <EmbeddedResource Remove="Objects\Requests\NovaPasta\**" />
+    <None Remove="Objects\Requests\NovaPasta1\**" />
+    <None Remove="Objects\Requests\NovaPasta\**" />
+  </ItemGroup>
+
 </Project>

@@ -31,9 +31,11 @@ namespace Infra.Data.Mappings
             builder.Property(e => e.UpdatedAt)
                 .IsRequired(false);
 
-            builder.HasMany(e => e.Procedures)
+            /*
+             builder.HasMany(e => e.Procedures)
                 .WithMany(p => p.Employees)
                 .UsingEntity<EmployeeProcedure>();
+            */
         }
     }
 }
