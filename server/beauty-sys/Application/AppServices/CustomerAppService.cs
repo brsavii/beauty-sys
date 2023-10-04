@@ -1,9 +1,7 @@
 ﻿
 using Application.Interfaces;
-using Domain.Interfaces.Repositories;
 using Domain.Interfaces.Services;
 using Domain.Objects.Requests;
-using Domain.Services;
 
 namespace Application.AppServices
 {

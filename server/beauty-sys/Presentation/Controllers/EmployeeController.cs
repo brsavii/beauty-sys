@@ -1,8 +1,6 @@
-﻿using Application.AppServices;
-using Application.Interfaces;
+﻿using Application.Interfaces;
 using Domain.Interfaces.Services;
 using Domain.Objects.Requests;
-using Domain.Services;
 using Microsoft.AspNetCore.Mvc;
 using Presentation.Utils.Base;
 
@@ -22,7 +20,7 @@ namespace Presentation.Controllers
         }
 
         [HttpGet("GetEmployees")]
-        public async Task<JsonResult> GetEmployees()    
+        public async Task<JsonResult> GetEmployees()
         {
             try
             {

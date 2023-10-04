@@ -1,6 +1,4 @@
-﻿using Domain.Models;
-
-namespace Domain.Objects.Reponses
+﻿namespace Domain.Objects.Reponses
 {
     public record CustomerResponse
     {
