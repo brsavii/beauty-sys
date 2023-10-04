@@ -65,6 +65,8 @@ namespace Domain.Services
             if (updateCustomerRequest.Description != null)
                 customer.Description = updateCustomerRequest.Description;
 
+            customer.UpdatedAt = DateTime.Now;
+
             await _customerRepository.UpdateAsync(customer);
         }
     }

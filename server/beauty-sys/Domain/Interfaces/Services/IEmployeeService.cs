@@ -7,6 +7,7 @@ namespace Domain.Interfaces.Services
     {
         Task<List<EmployeeResponse>> GetEmployees();
         Task<EmployeeResponse> GetById(int id);
+        Task UpdateEmployee(int id, UpdateEmployeeRequest updateEmployeeRequest);
         Task CreateEmployee(CreateEmployeeRequest createEmploeeRequest);
     }
 }

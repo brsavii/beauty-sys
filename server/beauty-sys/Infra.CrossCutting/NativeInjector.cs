@@ -14,6 +14,8 @@ namespace Infra.CrossCutting
         {
             services.AddScoped<ICustomerAppService, CustomerAppService>();
 
+            services.AddScoped<IEmployeeAppService, EmployeeAppService>();
+
             services.AddScoped<ICustomerService, CustomerService>();
 
             services.AddScoped<ICustomerRepository, CustomerRepository>();

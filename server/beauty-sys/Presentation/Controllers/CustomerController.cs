@@ -71,11 +71,11 @@ namespace Presentation.Controllers
             {
                 await _customerAppService.UpdateCustomer(id, updateCustomerRequest);
 
-                return ReponseBase.DefaultResponse(true, "Cliente deletado com sucesso");
+                return ReponseBase.DefaultResponse(true, "Atualizado com sucesso");
             }
             catch (Exception ex)
             {
-                return ReponseBase.DefaultResponse(false, $"Erro ao deletar cliente: {ex.Message}");
+                return ReponseBase.DefaultResponse(false, $"Erro ao atualizar: {ex.Message}");
             }
         }
 

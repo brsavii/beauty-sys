@@ -1,4 +1,6 @@
-﻿using Domain.Interfaces.Services;
+﻿using Application.AppServices;
+using Application.Interfaces;
+using Domain.Interfaces.Services;
 using Domain.Objects.Requests;
 using Domain.Services;
 using Microsoft.AspNetCore.Mvc;
@@ -11,10 +13,12 @@ namespace Presentation.Controllers
     public class EmployeeController : ControllerBase
     {
         private readonly IEmployeeService _employeeService;
+        private readonly IEmployeeAppService _employeeAppService;
 
-        public EmployeeController(IEmployeeService employeeService)
+        public EmployeeController(IEmployeeService employeeService, IEmployeeAppService employeeAppService)
         {
             _employeeService = employeeService;
+            _employeeAppService = employeeAppService;
         }
 
         [HttpGet("GetEmployees")]
@@ -59,6 +63,21 @@ namespace Presentation.Controllers
             catch (Exception ex)
             {
                 return ReponseBase.DefaultResponse(false, $"Erro ao cadastrar novo funcionário: {ex.Message}");
+            }
+        }
+
+        [HttpPatch("UpdateEmployee")]
+        public async Task<JsonResult> UpdateEmployee(int id, UpdateEmployeeRequest updateEmployeeRequest)
+        {
+            try
+            {
+                await _employeeAppService.UpdateEmployee(id, updateEmployeeRequest);
+
+                return ReponseBase.DefaultResponse(true, "Cliente atualizado com sucesso");
+            }
+            catch (Exception ex)
+            {
+                return ReponseBase.DefaultResponse(false, $"Erro ao atualizar cliente: {ex.Message}");
             }
         }
     }

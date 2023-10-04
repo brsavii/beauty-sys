@@ -48,5 +48,19 @@ namespace Domain.Services
             return employeeResponse;
         }
 
+        public async Task UpdateEmployee(int id, UpdateEmployeeRequest updateEmployeeRequest)
+        {
+            var employee = await _employeeRepository.GetById(id) ?? throw new InvalidOperationException("Nenhum cliente encontrado.");
+
+            if (updateEmployeeRequest.Name != null)
+                employee.Name = updateEmployeeRequest.Name;
+
+            if (updateEmployeeRequest.Office != null)
+                employee.Office = updateEmployeeRequest.Office;
+
+            employee.UpdatedAt = DateTime.Now;
+
+            await _employeeRepository.UpdateAsync(employee);
+        }
     }
 }
