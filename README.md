@@ -9,11 +9,11 @@ Welcome to the Make Up Salon Management System project developed for the "Socied
 
 - Only the admin user is allowed to add procedures, clients, and employees to the system.
 
-- Non-admin users can only create appointments, but only with their own name.
+- Non-admin users can only create and edit schedules, but only with their own name.
 
 - Non-admin users cannot edit their own employee profile, only view it.
 
-- Non-admin users should only be able to view their own appointments and can edit them.
+- Procedures must be linked on the employee screen, never the other way around. (Only admin users can do this)
 
 ## Table of Contents
 - [Introduction](#introduction)
