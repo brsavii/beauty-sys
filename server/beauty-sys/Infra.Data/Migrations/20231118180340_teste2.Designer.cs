@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Infra.Data.Migrations
 {
     [DbContext(typeof(ConfigContext))]
-    [Migration("20230831180445_ADDTABLE_EMPLOYEEPROCEDURE_RENAMETABLE_PROCEDURE")]
-    partial class ADDTABLE_EMPLOYEEPROCEDURE_RENAMETABLE_PROCEDURE
+    [Migration("20231118180340_teste2")]
+    partial class teste2
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -69,6 +69,7 @@ namespace Infra.Data.Migrations
 
                     b.Property<string>("Cpf")
                         .IsRequired()
+                        .HasMaxLength(11)
                         .HasColumnType("char(11)");
 
                     b.Property<DateTime>("InsertedAt")
@@ -89,16 +90,16 @@ namespace Infra.Data.Migrations
 
                     b.HasKey("EmployeeId");
 
-                    b.ToTable("Employee", (string)null);
+                    b.ToTable("Employees", (string)null);
                 });
 
             modelBuilder.Entity("Domain.Models.EmployeeProcedure", b =>
                 {
-                    b.Property<int>("EmployeesProceduresId")
+                    b.Property<int>("EmployeeProcedureId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("EmployeesProceduresId"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("EmployeeProcedureId"));
 
                     b.Property<int>("EmployeeId")
                         .HasColumnType("int");
@@ -106,14 +107,19 @@ namespace Infra.Data.Migrations
                     b.Property<DateTime>("InsertedAt")
                         .HasColumnType("datetime2");
 
+                    b.Property<int>("ProcedureId")
+                        .HasColumnType("int");
+
                     b.Property<DateTime?>("UpdatedAt")
                         .HasColumnType("datetime2");
 
-                    b.HasKey("EmployeesProceduresId");
+                    b.HasKey("EmployeeProcedureId");
 
                     b.HasIndex("EmployeeId");
 
-                    b.ToTable("EmployeeProcedure", (string)null);
+                    b.HasIndex("ProcedureId");
+
+                    b.ToTable("EmployeesProcedures", (string)null);
                 });
 
             modelBuilder.Entity("Domain.Models.Procedure", b =>
@@ -141,7 +147,39 @@ namespace Infra.Data.Migrations
 
                     b.HasKey("ProcedureId");
 
-                    b.ToTable("Procedure", (string)null);
+                    b.ToTable("Procedures", (string)null);
+                });
+
+            modelBuilder.Entity("Domain.Models.User", b =>
+                {
+                    b.Property<int>("UserId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("UserId"));
+
+                    b.Property<DateTime>("InsertedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("IsAdmin")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(70)
+                        .HasColumnType("nvarchar(70)");
+
+                    b.Property<string>("Password")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.Property<DateTime?>("UpdatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("UserId");
+
+                    b.ToTable("Users", (string)null);
                 });
 
             modelBuilder.Entity("Domain.Models.EmployeeProcedure", b =>
@@ -152,7 +190,15 @@ namespace Infra.Data.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("Domain.Models.Procedure", "Procedure")
+                        .WithMany()
+                        .HasForeignKey("ProcedureId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.Navigation("Employee");
+
+                    b.Navigation("Procedure");
                 });
 #pragma warning restore 612, 618
         }

@@ -147,16 +147,48 @@ namespace Infra.Data.Migrations
                     b.ToTable("Procedures", (string)null);
                 });
 
+            modelBuilder.Entity("Domain.Models.User", b =>
+                {
+                    b.Property<int>("UserId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("UserId"));
+
+                    b.Property<DateTime>("InsertedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("IsAdmin")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(70)
+                        .HasColumnType("nvarchar(70)");
+
+                    b.Property<string>("Password")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.Property<DateTime?>("UpdatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("UserId");
+
+                    b.ToTable("Users", (string)null);
+                });
+
             modelBuilder.Entity("Domain.Models.EmployeeProcedure", b =>
                 {
                     b.HasOne("Domain.Models.Employee", "Employee")
-                        .WithMany("EmployeeProcedures")
+                        .WithMany()
                         .HasForeignKey("EmployeeId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("Domain.Models.Procedure", "Procedure")
-                        .WithMany("EmployeeProcedures")
+                        .WithMany()
                         .HasForeignKey("ProcedureId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -164,16 +196,6 @@ namespace Infra.Data.Migrations
                     b.Navigation("Employee");
 
                     b.Navigation("Procedure");
-                });
-
-            modelBuilder.Entity("Domain.Models.Employee", b =>
-                {
-                    b.Navigation("EmployeeProcedures");
-                });
-
-            modelBuilder.Entity("Domain.Models.Procedure", b =>
-                {
-                    b.Navigation("EmployeeProcedures");
                 });
 #pragma warning restore 612, 618
         }
