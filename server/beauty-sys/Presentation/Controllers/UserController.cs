@@ -15,7 +15,7 @@ namespace Presentation.Controllers
             _userService = userService;
         }
 
-        [HttpGet("LogIn")]
+        [HttpPost("LogIn")]
         public IActionResult LogIn(LogInRequest logInRequest)
         {
             try
