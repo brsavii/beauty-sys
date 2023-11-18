@@ -1,9 +1,9 @@
-﻿using Domain.Objects.Reponses;
+﻿using Domain.Objects.Requests;
 
 namespace Domain.Interfaces.Services
 {
     public interface IUserService
     {
-        Task<string> LogIn();
+        string LogIn(LogInRequest logInRequest);
     }
 }

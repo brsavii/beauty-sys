@@ -1,8 +1,6 @@
-﻿using Application.Interfaces;
-using Domain.Interfaces.Services;
+﻿using Domain.Interfaces.Services;
 using Domain.Objects.Requests;
 using Microsoft.AspNetCore.Mvc;
-using Presentation.Utils.Base;
 
 namespace Presentation.Controllers
 {
@@ -18,13 +16,11 @@ namespace Presentation.Controllers
         }
 
         [HttpGet("LogIn")]
-        public async Task<IActionResult> GetCustomers()
+        public IActionResult LogIn(LogInRequest logInRequest)
         {
             try
             {
-                var authToken = await _userService.LogIn();
-
-                return Ok(authToken);
+                return Ok(_userService.LogIn(logInRequest));
             }
             catch (Exception ex)
             {

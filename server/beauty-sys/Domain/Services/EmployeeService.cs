@@ -4,7 +4,6 @@ using Domain.Interfaces.Services;
 using Domain.Models;
 using Domain.Objects.Reponses;
 using Domain.Objects.Requests;
-using System.Xml.Linq;
 
 namespace Domain.Services
 {

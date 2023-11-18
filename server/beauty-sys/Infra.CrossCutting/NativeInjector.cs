@@ -25,6 +25,8 @@ namespace Infra.CrossCutting
             services.AddScoped<IEmployeeService, EmployeeService>();
 
             services.AddScoped<IEmployeeRepository, EmployeeRepository>();
+
+            services.AddScoped<IUserRepository, UserRepository>();
         }
     }
 }

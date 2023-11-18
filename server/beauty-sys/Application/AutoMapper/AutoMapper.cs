@@ -1,7 +1,6 @@
 ﻿using AutoMapper;
 using Domain.Models;
 using Domain.Objects.Requests;
-using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace Application.AutoMapper
 {

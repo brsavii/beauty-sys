@@ -1,6 +1,4 @@
-﻿using Domain.Models;
-
-namespace Domain.Objects.Requests
+﻿namespace Domain.Objects.Requests
 {
     public record CreateEmployeeRequest
     {
