@@ -29,6 +29,7 @@ namespace Infra.Data.Mappings
             builder.HasMany(p => p.Employees)
                 .WithMany(e => e.Procedures)
                 .UsingEntity<EmployeeProcedure>();
+
         }
     }
 }

@@ -7,7 +7,16 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Interfaces\Services\" />
+    <Compile Remove="Objects\Requests\NovaPasta1\**" />
+    <Compile Remove="Objects\Requests\NovaPasta\**" />
+    <EmbeddedResource Remove="Objects\Requests\NovaPasta1\**" />
+    <EmbeddedResource Remove="Objects\Requests\NovaPasta\**" />
+    <None Remove="Objects\Requests\NovaPasta1\**" />
+    <None Remove="Objects\Requests\NovaPasta\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="12.0.1" />
   </ItemGroup>
 
 </Project>
