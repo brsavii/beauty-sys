@@ -10,5 +10,6 @@ namespace Domain.Models
 
         public virtual required Employee Employee { get; set; }
         public virtual required Procedure Procedure { get; set; }
+        public virtual Scheduling? Scheduling { get; set; }
     }
 }

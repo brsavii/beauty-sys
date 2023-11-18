@@ -8,5 +8,7 @@ namespace Domain.Models
         public required string Name { get; set; }
         public required string Phone { get; set; }
         public required string Description { get; set; }
+
+        public virtual Scheduling? Scheduling { get; set; }
     }
 }
