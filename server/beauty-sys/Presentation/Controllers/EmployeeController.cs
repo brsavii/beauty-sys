@@ -49,12 +49,13 @@ namespace Presentation.Controllers
             }
         }
 
-        [HttpPost("CreateEmployee")]
+        [HttpPost("SaveEmployee")]
         public async Task<JsonResult> SaveEmployee([FromBody] CreateEmployeeRequest createEmployeeRequest)
         {
             try
             {
                 await _employeeService.CreateEmployee(createEmployeeRequest);
+
                 return ReponseBase.DefaultResponse(true, "Funcionário cadastrado com sucesso!");
 
             }

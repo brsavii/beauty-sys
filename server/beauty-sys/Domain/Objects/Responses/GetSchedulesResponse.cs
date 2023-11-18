@@ -1,6 +1,6 @@
 ﻿namespace Domain.Objects.Responses
 {
-    public record GetSchedulesResponse
+    public record GetSchedulingsResponse
     {
         public required IEnumerable<Day> Days { get; set; }
     }

@@ -1,4 +1,5 @@
 ﻿using Domain.Interfaces.Services;
+using Domain.Objects.Requests;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Presentation.Controllers
@@ -14,15 +15,25 @@ namespace Presentation.Controllers
             _schedulingService = schedulingService;
         }
 
-
-        //criar metodo pra salvar 
-
-        [HttpGet("GetSchedules")]
-        public IActionResult GetSchedules(int month, int year)
+        [HttpPost("SaveScheduling")]
+        public IActionResult SaveScheduling(CreateSchedulingRequest createSchedulingRequest)
         {
             try
             {
-                return Ok(_schedulingService.GetSchedules(month));
+                return Ok(_schedulingService.SaveScheduling(createSchedulingRequest);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
+        [HttpGet("GetSchedulings")]
+        public IActionResult GetSchedulings(int month, int year)
+        {
+            try
+            {
+                return Ok(_schedulingService.GetSchedulings(month));
             }
             catch (Exception ex)
             {

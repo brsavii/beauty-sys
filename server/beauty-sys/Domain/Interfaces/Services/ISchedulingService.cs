@@ -1,9 +1,11 @@
-﻿using Domain.Objects.Responses;
+﻿using Domain.Objects.Requests;
+using Domain.Objects.Responses;
 
 namespace Domain.Interfaces.Services
 {
     public interface ISchedulingService
     {
-        GetSchedulesResponse GetSchedules(int month);
+        Task SaveScheduling(CreateSchedulingRequest createSchedulingRequest);
+        GetSchedulingsResponse GetSchedulings(int month);
     }
 }
