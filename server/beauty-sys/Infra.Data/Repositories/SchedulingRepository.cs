@@ -1,13 +1,27 @@
-﻿using Domain.Interfaces.Repositories;
+﻿using AutoMapper;
+using Domain.Interfaces.Repositories;
 using Domain.Models;
+using Domain.Objects.Responses;
 using Infra.Data.Context;
+using Microsoft.EntityFrameworkCore;
 
 namespace Infra.Data.Repositories
 {
     public class SchedulingRepository : BaseRepository<Scheduling>, ISchedulingRepository
     {
-        public SchedulingRepository(ConfigContext context) : base(context)
+        private readonly IMapper _mapper;
+
+        public SchedulingRepository(ConfigContext context, IMapper mapper) : base(context)
         {
+            _mapper = mapper;
+        }
+
+        public IQueryable<GetSchedulingsToCalendarResponse> GetSchedulingsToCalendar(int month, int year)
+        {
+            return _mapper.ProjectTo<GetSchedulingsToCalendarResponse>(_typedContext
+                .AsNoTracking()
+                .Include(s => s.Customer)
+                .Where(s => s.StartDate.Month == month && s.StartDate.Year == year));
         }
     }
 }

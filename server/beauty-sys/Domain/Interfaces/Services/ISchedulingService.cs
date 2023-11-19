@@ -6,6 +6,6 @@ namespace Domain.Interfaces.Services
     public interface ISchedulingService
     {
         Task SaveScheduling(CreateSchedulingRequest createSchedulingRequest);
-        GetSchedulingsResponse GetSchedulings(int month);
+        ICollection<GetSchedulingsToCalendarResponse> GetSchedulingsToCalendar(int month, int year);
     }
 }

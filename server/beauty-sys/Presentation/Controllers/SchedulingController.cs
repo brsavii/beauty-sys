@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace Presentation.Controllers
 {
     [ApiController]
-    [Route("User")]
+    [Route("Scheduling")]
     public class SchedulingController : ControllerBase
     {
         private readonly ISchedulingService _schedulingService;
@@ -16,11 +16,13 @@ namespace Presentation.Controllers
         }
 
         [HttpPost("SaveScheduling")]
-        public IActionResult SaveScheduling(CreateSchedulingRequest createSchedulingRequest)
+        public async Task<IActionResult> SaveScheduling(CreateSchedulingRequest createSchedulingRequest)
         {
             try
             {
-                return Ok(_schedulingService.SaveScheduling(createSchedulingRequest));
+                await _schedulingService.SaveScheduling(createSchedulingRequest);
+
+                return Ok();
             }
             catch (Exception ex)
             {
@@ -28,12 +30,12 @@ namespace Presentation.Controllers
             }
         }
 
-        [HttpGet("GetSchedulings")]
-        public IActionResult GetSchedulings(int month, int year)
+        [HttpGet("GetSchedulingsToCalendar")]
+        public IActionResult GetSchedulingsToCalendar(int month, int year)
         {
             try
             {
-                return Ok(_schedulingService.GetSchedulings(month));
+                return Ok(_schedulingService.GetSchedulingsToCalendar(month, year));
             }
             catch (Exception ex)
             {
