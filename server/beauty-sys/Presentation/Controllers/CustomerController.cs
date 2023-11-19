@@ -2,7 +2,6 @@
 using Domain.Interfaces.Services;
 using Domain.Objects.Requests;
 using Microsoft.AspNetCore.Mvc;
-using Presentation.Utils.Base;
 
 namespace Presentation.Controllers
 {
@@ -20,77 +19,74 @@ namespace Presentation.Controllers
         }
 
         [HttpGet("GetCustomers")]
-        public async Task<JsonResult> GetCustomers()
+        public async Task<IActionResult> GetCustomers()
         {
             try
             {
-                var customers = await _customerService.GetCustomers();
-
-                return ReponseBase.DefaultResponse(true, objectData: customers);
+                return Ok(await _customerService.GetCustomers());
             }
             catch (Exception ex)
             {
-                return ReponseBase.DefaultResponse(false, message: ex.Message);
+                return BadRequest(ex.Message);
             }
         }
 
         [HttpGet("GetById")]
-        public async Task<JsonResult> GetById(int id)
+        public async Task<IActionResult> GetById(int id)
         {
             try
             {
-                var customers = await _customerService.GetById(id);
-
-                return ReponseBase.DefaultResponse(true, objectData: customers);
+                return Ok(await _customerService.GetById(id));
             }
             catch (Exception ex)
             {
-                return ReponseBase.DefaultResponse(false, message: ex.Message);
+                return BadRequest(ex.Message);
             }
         }
 
         [HttpDelete("DeleteCustomer")]
-        public async Task<JsonResult> DeleteCustomer(int id)
+        public async Task<IActionResult> DeleteCustomer(int id)
         {
             try
             {
                 await _customerService.DeleteCustomer(id);
 
-                return ReponseBase.DefaultResponse(true, "Cliente deletado com sucesso");
+                return Ok();
             }
             catch (Exception ex)
             {
-                return ReponseBase.DefaultResponse(false, $"Erro ao deletar cliente: {ex.Message}");
+                return BadRequest($"Erro ao deletar cliente: {ex.Message}");
             }
         }
 
         [HttpPatch("UpdateCustomer")]
-        public async Task<JsonResult> UpdateCustomer(int id, UpdateCustomerRequest updateCustomerRequest)
+        public async Task<IActionResult> UpdateCustomer(int id, UpdateCustomerRequest updateCustomerRequest)
         {
             try
             {
                 await _customerAppService.UpdateCustomer(id, updateCustomerRequest);
 
-                return ReponseBase.DefaultResponse(true, "Atualizado com sucesso");
+                return Ok();
             }
             catch (Exception ex)
             {
-                return ReponseBase.DefaultResponse(false, $"Erro ao atualizar: {ex.Message}");
+                return BadRequest($"Erro ao atualizar: {ex.Message}");
             }
         }
 
-        [HttpPost("CreateCustomer")]
-        public async Task<JsonResult> SaveCustomer([FromBody] CreateCustomerRequest createCustomerRequest)
+        [HttpPost("SaveCustomer")]
+        public async Task<IActionResult> SaveCustomer([FromBody] CreateCustomerRequest createCustomerRequest)
         {
             try
             {
                 await _customerService.CreateCustomer(createCustomerRequest);
-                return ReponseBase.DefaultResponse(true, "Cliente cadastrado com sucesso!");
+
+                return Ok();
 
             }
             catch (Exception ex)
             {
-                return ReponseBase.DefaultResponse(false, $"Erro ao cadastrar novo cliente: {ex.Message}");
+                return BadRequest($"Erro ao cadastrar novo cliente: {ex.Message}");
             }
         }
     }

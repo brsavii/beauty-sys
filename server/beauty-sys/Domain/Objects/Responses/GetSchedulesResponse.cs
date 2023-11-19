@@ -2,7 +2,7 @@
 {
     public record GetSchedulingsResponse
     {
-        public required IEnumerable<Day> Days { get; set; }
+        public required ICollection<Day> Days { get; set; }
     }
 
     public record Day

@@ -2,7 +2,6 @@
 using Domain.Interfaces.Services;
 using Domain.Objects.Requests;
 using Microsoft.AspNetCore.Mvc;
-using Presentation.Utils.Base;
 
 namespace Presentation.Controllers
 {
@@ -20,63 +19,59 @@ namespace Presentation.Controllers
         }
 
         [HttpGet("GetEmployees")]
-        public async Task<JsonResult> GetEmployees()
+        public async Task<IActionResult> GetEmployees()
         {
             try
             {
-                var employees = await _employeeService.GetEmployees();
-
-                return ReponseBase.DefaultResponse(true, objectData: employees);
+                return Ok(await _employeeService.GetEmployees());
             }
             catch (Exception ex)
             {
-                return ReponseBase.DefaultResponse(false, message: ex.Message);
+                return BadRequest(ex.Message);
             }
         }
 
         [HttpGet("GetById")]
-        public async Task<JsonResult> GetById(int id)
+        public async Task<IActionResult> GetById(int id)
         {
             try
             {
-                var employee = await _employeeService.GetById(id);
-
-                return ReponseBase.DefaultResponse(true, objectData: employee);
+                return Ok(await _employeeService.GetById(id));
             }
             catch (Exception ex)
             {
-                return ReponseBase.DefaultResponse(false, message: ex.Message);
+                return BadRequest(ex.Message);
             }
         }
 
         [HttpPost("SaveEmployee")]
-        public async Task<JsonResult> SaveEmployee([FromBody] CreateEmployeeRequest createEmployeeRequest)
+        public async Task<IActionResult> SaveEmployee([FromBody] CreateEmployeeRequest createEmployeeRequest)
         {
             try
             {
                 await _employeeService.CreateEmployee(createEmployeeRequest);
 
-                return ReponseBase.DefaultResponse(true, "Funcionário cadastrado com sucesso!");
+                return Ok();
 
             }
             catch (Exception ex)
             {
-                return ReponseBase.DefaultResponse(false, $"Erro ao cadastrar novo funcionário: {ex.Message}");
+                return BadRequest($"Erro ao cadastrar novo funcionário: {ex.Message}");
             }
         }
 
         [HttpPatch("UpdateEmployee")]
-        public async Task<JsonResult> UpdateEmployee(int id, UpdateEmployeeRequest updateEmployeeRequest)
+        public async Task<IActionResult> UpdateEmployee(int id, UpdateEmployeeRequest updateEmployeeRequest)
         {
             try
             {
                 await _employeeAppService.UpdateEmployee(id, updateEmployeeRequest);
 
-                return ReponseBase.DefaultResponse(true, "Cliente atualizado com sucesso");
+                return Ok();
             }
             catch (Exception ex)
             {
-                return ReponseBase.DefaultResponse(false, $"Erro ao atualizar cliente: {ex.Message}");
+                return BadRequest($"Erro ao atualizar cliente: {ex.Message}");
             }
         }
     }

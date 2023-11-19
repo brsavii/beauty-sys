@@ -8,9 +8,11 @@ namespace Domain.Models
         public int SchedulingId { get; set; }
         public DateTime StartDate { get; set; }
         public int CustomerId { get; set; }
-        public int EmployeeProcedureId { get; set; }
+        public int EmployeeId { get; set; }
+        public int ProcedureId { get; set; }
 
         public virtual required Customer Customer { get; set; }
-        public virtual required EmployeeProcedure EmployeeProcedure { get; set; }
+        public virtual required Employee Employee { get; set; }
+        public virtual required Procedure Procedure { get; set; }
     }
 }

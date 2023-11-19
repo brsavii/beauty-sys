@@ -20,7 +20,7 @@ namespace Presentation.Controllers
         {
             try
             {
-                return Ok(_schedulingService.SaveScheduling(createSchedulingRequest);
+                return Ok(_schedulingService.SaveScheduling(createSchedulingRequest));
             }
             catch (Exception ex)
             {

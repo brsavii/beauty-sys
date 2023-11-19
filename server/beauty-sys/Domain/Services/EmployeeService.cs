@@ -1,5 +1,4 @@
-﻿using AutoMapper;
-using Domain.Interfaces.Repositories;
+﻿using Domain.Interfaces.Repositories;
 using Domain.Interfaces.Services;
 using Domain.Models;
 using Domain.Objects.Reponses;
@@ -10,11 +9,9 @@ namespace Domain.Services
     public class EmployeeService : IEmployeeService
     {
         private readonly IEmployeeRepository _employeeRepository;
-        private readonly IMapper _mapper;
 
-        public EmployeeService(IEmployeeRepository employeeRepository, IMapper mapper)
+        public EmployeeService(IEmployeeRepository employeeRepository)
         {
-            _mapper = mapper;
             _employeeRepository = employeeRepository;
         }
 
@@ -24,8 +21,7 @@ namespace Domain.Services
             {
                 Name = createEmployeeRequest.Name,
                 Office = createEmployeeRequest.Office,
-                Cpf = createEmployeeRequest.Cpf,
-                Procedures = _mapper.ProjectTo<Procedure>(createEmployeeRequest.Procedures.AsQueryable()).ToList()
+                Cpf = createEmployeeRequest.Cpf
             };
 
             await _employeeRepository.SaveAsync(employee);

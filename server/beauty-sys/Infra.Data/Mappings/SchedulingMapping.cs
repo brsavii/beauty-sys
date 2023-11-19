@@ -18,16 +18,17 @@ namespace Infra.Data.Mappings
             builder.Property(s => s.CustomerId)
                 .IsRequired();
 
-            builder.Property(s => s.EmployeeProcedureId)
-                .IsRequired();
-
             builder.HasOne(s => s.Customer)
                 .WithOne(c => c.Scheduling)
-                .HasForeignKey<Scheduling>(s => s.SchedulingId);
+                .HasForeignKey<Scheduling>(s => s.CustomerId);
 
-            builder.HasOne(s => s.EmployeeProcedure)
-                .WithOne(e => e.Scheduling)
-                .HasForeignKey<Scheduling>(s => s.SchedulingId);
+            builder.HasOne(s => s.Employee)
+                .WithMany(e => e.Schedulings)
+                .HasForeignKey(s => s.EmployeeId);
+
+            builder.HasOne(s => s.Procedure)
+                .WithMany(e => e.Schedulings)
+                .HasForeignKey(s => s.ProcedureId);
 
             builder.Property(s => s.InsertedAt)
                 .IsRequired();
