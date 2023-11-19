@@ -21,7 +21,8 @@ namespace Domain.Services
             {
                 Name = createEmployeeRequest.Name,
                 Office = createEmployeeRequest.Office,
-                Cpf = createEmployeeRequest.Cpf
+                Cpf = createEmployeeRequest.Cpf,
+                InsertedAt = DateTime.Now
             };
 
             await _employeeRepository.SaveAsync(employee);

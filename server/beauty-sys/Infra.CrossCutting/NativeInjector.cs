@@ -13,20 +13,19 @@ namespace Infra.CrossCutting
         public static void RegisterServices(IServiceCollection services)
         {
             services.AddScoped<ICustomerAppService, CustomerAppService>();
-
             services.AddScoped<IEmployeeAppService, EmployeeAppService>();
 
             services.AddScoped<ICustomerService, CustomerService>();
-
             services.AddScoped<IUserService, UserService>();
+            services.AddScoped<IEmployeeService, EmployeeService>();
+            services.AddScoped<IProcedureService, ProcedureService>();
+            services.AddScoped<ISchedulingService, SchedulingService>();
 
             services.AddScoped<ICustomerRepository, CustomerRepository>();
-
-            services.AddScoped<IEmployeeService, EmployeeService>();
-
             services.AddScoped<IEmployeeRepository, EmployeeRepository>();
-
             services.AddScoped<IUserRepository, UserRepository>();
+            services.AddScoped<ISchedulingRepository, SchedulingRepository>();
+            services.AddScoped<IProcedureRepository, ProcedureRepository>();
         }
     }
 }

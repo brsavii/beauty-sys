@@ -11,13 +11,10 @@ namespace Application.AutoMapper
             Maps();
         }
 
-        #region Usuario
-
         private void Maps()
         {
-            CreateMap<CreateProcedureRequest, Procedure>();
+            CreateMap<CreateProcedureRequest, Procedure>()
+                .ForMember(p => p.InsertedAt, opts => opts.MapFrom(c => DateTime.Now));
         }
-
-        #endregion
     }
 }

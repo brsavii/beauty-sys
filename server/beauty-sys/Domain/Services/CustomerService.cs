@@ -21,9 +21,9 @@ namespace Domain.Services
                 Name = createCustomerRequest.Name,
                 Phone = createCustomerRequest.Phone,
                 Description = createCustomerRequest.Description,
+                InsertedAt = DateTime.Now
             };
 
-            customer.InsertedAt = DateTime.Now;
             await _customerRepository.SaveAsync(customer);
         }
 

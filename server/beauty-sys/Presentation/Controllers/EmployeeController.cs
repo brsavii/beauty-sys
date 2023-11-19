@@ -45,7 +45,7 @@ namespace Presentation.Controllers
         }
 
         [HttpPost("SaveEmployee")]
-        public async Task<IActionResult> SaveEmployee([FromBody] CreateEmployeeRequest createEmployeeRequest)
+        public async Task<IActionResult> SaveEmployee(CreateEmployeeRequest createEmployeeRequest)
         {
             try
             {
