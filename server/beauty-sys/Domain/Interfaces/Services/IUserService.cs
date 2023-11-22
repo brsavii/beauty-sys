@@ -5,6 +5,6 @@ namespace Domain.Interfaces.Services
 {
     public interface IUserService
     {
-        LogInResponse LogIn(LogInRequest logInRequest);
+        string LogIn(LogInRequest logInRequest);
     }
 }

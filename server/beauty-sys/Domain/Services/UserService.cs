@@ -1,6 +1,5 @@
 ﻿using Domain.Interfaces.Repositories;
 using Domain.Interfaces.Services;
-using Domain.Objects.Reponses;
 using Domain.Objects.Requests;
 using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
@@ -19,20 +18,14 @@ namespace Domain.Services
             _userRepository = userRepository;
         }
 
-        public LogInResponse LogIn(LogInRequest logInRequest)
+        public string LogIn(LogInRequest logInRequest)
         {
             var userId = _userRepository.GetUserIdByNameAndPass(logInRequest.UserName, logInRequest.Password);
 
             if (!userId.HasValue)
                 throw new InvalidCredentialException("Usuário ou senha inválidos");
 
-            var authToken = GenerateAuthToken(userId.Value.ToString());
-
-            return new LogInResponse
-            {
-                UserName = logInRequest.UserName,
-                AuthToken = authToken,
-            };
+            return GenerateAuthToken(userId.Value.ToString());
         }
 
         private static string GenerateAuthToken(string userId)
