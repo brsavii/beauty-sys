@@ -79,7 +79,6 @@ builder.Services.AddCors(options =>
         });
 });
 
-
 builder.Services.AddDbContext<ConfigContext>(options => options.UseSqlServer(builder.Configuration["BeautySysConnectionString"]));
 
 NativeInjector.RegisterServices(builder.Services);
@@ -90,6 +89,13 @@ if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
     app.UseSwaggerUI();
+}
+
+using (var serviceScope = app.Services.GetService<IServiceScopeFactory>()!.CreateScope())
+{
+    var context = serviceScope.ServiceProvider.GetRequiredService<ConfigContext>();
+
+    context.Database.EnsureCreated();
 }
 
 app.UseHttpsRedirection();
