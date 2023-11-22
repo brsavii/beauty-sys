@@ -19,11 +19,11 @@ namespace Presentation.Controllers
         }
 
         [HttpGet("GetCustomers")]
-        public async Task<IActionResult> GetCustomers()
+        public IActionResult GetCustomers()
         {
             try
             {
-                return Ok(await _customerService.GetCustomers());
+                return Ok(_customerService.GetCustomers());
             }
             catch (Exception ex)
             {

@@ -40,9 +40,9 @@ namespace Infra.Data.Repositories
             _context.SaveChanges();
         }
 
-        public async Task<List<T>> GetAllAsync()
+        public IQueryable<T> GetAll()
         {
-            return await _typedContext.ToListAsync();
+            return _typedContext;
         }
 
         public async void Dispose() => await _context.DisposeAsync();

@@ -35,9 +35,9 @@ namespace Domain.Services
 
             return employeeResponse;
         }
-        public async Task<List<EmployeeResponse>> GetEmployees()
+        public List<EmployeeResponse> GetEmployees()
         {
-            var employees = await _employeeRepository.GetAllAsync();
+            var employees = _employeeRepository.GetAll();
 
             var employeeResponse = new List<EmployeeResponse>();
 

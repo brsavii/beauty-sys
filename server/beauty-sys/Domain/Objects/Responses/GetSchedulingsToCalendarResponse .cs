@@ -3,6 +3,7 @@
     public record GetSchedulingsToCalendarResponse
     {
         public int Day { get; set; }
+        public int? SchedulingId { get; set; }
         public DailySchedule? DailySchedules { get; set; }
     }
 

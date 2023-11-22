@@ -42,5 +42,18 @@ namespace Presentation.Controllers
                 return BadRequest(ex.Message);
             }
         }
+
+        [HttpGet("GetSchedulingById")]
+        public IActionResult GetSchedulingDetail(int schedulingId)
+        {
+            try
+            {
+                return Ok(_schedulingService.GetSchedulingDetail(schedulingId));
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
     }
 }

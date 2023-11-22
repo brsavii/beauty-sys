@@ -21,8 +21,19 @@ namespace Application.AutoMapper
                 .ForMember(g => g.Day, opts => opts.MapFrom(s => s.StartDate.Day))
                 .ForMember(g => g.DailySchedules, opts => opts.MapFrom(s => s.Customer));
 
-            CreateMap<Customer, DailySchedule>()
+            CreateProjection<Customer, DailySchedule>()
                 .ForMember(g => g.CustomerName, opts => opts.MapFrom(c => c.Name));
+
+            CreateMap<Scheduling, SchedulingDetailsIds>();
+
+            CreateProjection<Customer, CustomerBasicInfo>()
+                .ForMember(g => g.CustomerName, opts => opts.MapFrom(c => c.Name));
+
+            CreateProjection<Employee, EmployeeBasicInfo>()
+                .ForMember(g => g.EmployeeName, opts => opts.MapFrom(e => e.Name));
+
+            CreateProjection<Procedure, ProcedureBasicInfo>()
+                .ForMember(g => g.ProcedureName, opts => opts.MapFrom(p => p.Name));
         }
     }
 }

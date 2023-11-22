@@ -38,9 +38,9 @@ namespace Domain.Services
             return customerResponse;
         }
 
-        public async Task<List<CustomerResponse>> GetCustomers()
+        public List<CustomerResponse> GetCustomers()
         {
-            var customers = await _customerRepository.GetAllAsync();
+            var customers = _customerRepository.GetAll();
 
             var customerResponse = new List<CustomerResponse>();
 

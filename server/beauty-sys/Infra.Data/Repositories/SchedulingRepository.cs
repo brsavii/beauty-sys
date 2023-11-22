@@ -23,5 +23,15 @@ namespace Infra.Data.Repositories
                 .Include(s => s.Customer)
                 .Where(s => s.StartDate.Month == month && s.StartDate.Year == year));
         }
+
+        public SchedulingDetailsIds GetSchedulingDetailIds(int schedulingId)
+        {
+            return _mapper.Map<SchedulingDetailsIds>(_typedContext
+                .AsNoTracking()
+                .Include(s => s.Customer)
+                .Include(s => s.Employee)
+                .Include(s => s.Procedure)
+                .Where(s => s.SchedulingId == schedulingId));
+        }
     }
 }

@@ -60,6 +60,32 @@ namespace Domain.Services
             return schedulings;
         }
 
+
+        public GetSchedulingDetailResponse GetSchedulingDetail(int schedulingId)
+        {
+            var schedulingDetailsIds = _schedulingRepository.GetSchedulingDetailIds(schedulingId)
+                ?? throw new InvalidOperationException("Nenhum agendamento encontrado");
+
+            var customerDetails = _customerRepository.GetCustomerBasicInfo().ToList()
+                ?? throw new InvalidOperationException("Nenhum cliente encontrado");
+
+            var employeeDetails = _employeeRepository.GetEmployeeBasicInfo().ToList()
+                ?? throw new InvalidOperationException("Nenhum funcionário encontrado");
+
+            var procedureDetails = _procedureRepository.GetProcedureBasicInfo().ToList()
+                 ?? throw new InvalidOperationException("Nenhum procedimento encontrado");
+
+            return new GetSchedulingDetailResponse
+            {
+                CurrentCustomerId = schedulingDetailsIds.CurrentCustomerId,
+                CurrentEmployeeId = schedulingDetailsIds.CurrentEmployeeId,
+                CurrentProcedureId = schedulingDetailsIds.CurrentProcedureId,
+                Customers = customerDetails,
+                Employees = employeeDetails,
+                Procedures = procedureDetails
+            };
+        }
+
         private static void AdjustDays(ref ICollection<GetSchedulingsToCalendarResponse> schedulings, IEnumerable<int> daysInMonth)
         {
             var populatedDays = schedulings.Select(m => m.Day);
