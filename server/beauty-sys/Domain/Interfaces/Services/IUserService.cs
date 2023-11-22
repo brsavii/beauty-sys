@@ -1,9 +1,10 @@
-﻿using Domain.Objects.Requests;
+﻿using Domain.Objects.Reponses;
+using Domain.Objects.Requests;
 
 namespace Domain.Interfaces.Services
 {
     public interface IUserService
     {
-        string LogIn(LogInRequest logInRequest);
+        LogInResponse LogIn(LogInRequest logInRequest);
     }
 }
