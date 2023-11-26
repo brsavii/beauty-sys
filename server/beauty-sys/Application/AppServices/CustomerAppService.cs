@@ -15,7 +15,7 @@ namespace Application.AppServices
 
         public async Task CreateCustomer(CreateCustomerRequest createCustomerRequest)
         {
-            if (createCustomerRequest.Phone.Length != 11)
+            if (!IsValidPhoneNumber(createCustomerRequest.Phone))
                 throw new InvalidOperationException("Telefone inválido");
 
             await _customerService.CreateCustomer(createCustomerRequest);
@@ -26,7 +26,12 @@ namespace Application.AppServices
             if (updateCustomerRequest.Name == null && updateCustomerRequest.Description == null && updateCustomerRequest.Phone == null)
                 throw new InvalidOperationException("Nenhuma modificação foi realizada!");
 
+            if (updateCustomerRequest.Phone != null && !IsValidPhoneNumber(updateCustomerRequest.Phone))
+                throw new InvalidOperationException("Telefone inválido");
+
             await _customerService.UpdateCustomer(id, updateCustomerRequest);
         }
+
+        private static bool IsValidPhoneNumber(string phoneNumber) => phoneNumber.Length != 11;
     }
 }
