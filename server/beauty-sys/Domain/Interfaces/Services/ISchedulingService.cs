@@ -8,5 +8,7 @@ namespace Domain.Interfaces.Services
         Task SaveScheduling(CreateSchedulingRequest createSchedulingRequest);
         ICollection<GetSchedulingsToCalendarResponse> GetSchedulingsToCalendar(int month, int year);
         GetSchedulingDetailResponse GetSchedulingDetail(int schedulingId);
+        Task UpdateScheduling(int id, UpdateSchedulingRequest updateSchedulingRequest);
+        Task DeleteScheduling(int id);
     }
 }

@@ -60,7 +60,6 @@ namespace Domain.Services
             return schedulings;
         }
 
-
         public GetSchedulingDetailResponse GetSchedulingDetail(int schedulingId)
         {
             var schedulingDetailsIds = _schedulingRepository.GetSchedulingDetailIds(schedulingId)
@@ -85,6 +84,35 @@ namespace Domain.Services
                 Procedures = procedureDetails
             };
         }
+
+        public async Task UpdateScheduling(int id, UpdateSchedulingRequest updateSchedulingRequest)
+        {
+            var scheduling = await _schedulingRepository.GetById(id) ?? throw new InvalidOperationException("Nenhum agendamento encontrado");
+
+            if (updateSchedulingRequest.CustomerId.HasValue)
+            {
+                var customer = await _customerRepository.GetById(updateSchedulingRequest.CustomerId.Value) ?? throw new InvalidOperationException("Nenhum cliente encontrado");
+                scheduling.Customer = customer;
+            }
+
+            if (updateSchedulingRequest.EmployeeId.HasValue)
+            {
+                var employee = await _employeeRepository.GetById(updateSchedulingRequest.EmployeeId.Value) ?? throw new InvalidOperationException("Nenhum funcionário encontrado");
+                scheduling.Employee = employee;
+            }
+
+            if (updateSchedulingRequest.ProcedureId.HasValue)
+            {
+                var procedure = await _procedureRepository.GetById(updateSchedulingRequest.ProcedureId.Value) ?? throw new InvalidOperationException("Nenhum procedimento encontrado");
+                scheduling.Procedure = procedure;
+            }
+
+            scheduling.UpdatedAt = DateTime.Now;
+
+            await _schedulingRepository.UpdateAsync(scheduling);
+        }
+
+        public async Task DeleteScheduling(int id) => await _schedulingRepository.Delete(id);
 
         private static void AdjustDays(ref ICollection<GetSchedulingsToCalendarResponse> schedulings, IEnumerable<int> daysInMonth)
         {
