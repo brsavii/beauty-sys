@@ -1,7 +1,6 @@
 ﻿using Domain.Interfaces.Repositories;
 using Infra.Data.Context;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Identity.Client;
 
 namespace Infra.Data.Repositories
 {
@@ -37,9 +36,9 @@ namespace Infra.Data.Repositories
             var modelObject = await GetById(id)
                 ?? throw new InvalidOperationException("Nenhuma entidade encontrada");
 
-           _typedContext.Remove(modelObject);
+            _typedContext.Remove(modelObject);
 
-           _context.SaveChanges();
+            _context.SaveChanges();
         }
 
         public IQueryable<T> GetAll(int currentPage, int takeQuantity = 10)

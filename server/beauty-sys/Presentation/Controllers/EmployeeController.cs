@@ -23,20 +23,7 @@ namespace Presentation.Controllers
         {
             try
             {
-                return Ok(_employeeService.GetEmployees());
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(ex.Message);
-            }
-        }
-
-        [HttpGet("GetById")]
-        public async Task<IActionResult> GetById(int id)
-        {
-            try
-            {
-                return Ok(await _employeeService.GetById(id));
+                return Ok(_employeeService.GetEmployees(currentPage, takeQuantity));
             }
             catch (Exception ex)
             {
@@ -56,7 +43,7 @@ namespace Presentation.Controllers
             }
             catch (Exception ex)
             {
-                return BadRequest($"Erro ao cadastrar novo funcionário: {ex.Message}");
+                return BadRequest(ex.Message);
             }
         }
 
@@ -71,7 +58,23 @@ namespace Presentation.Controllers
             }
             catch (Exception ex)
             {
-                return BadRequest($"Erro ao atualizar cliente: {ex.Message}");
+                return BadRequest(ex.Message);
+            }
+        }
+
+
+        [HttpDelete("DeleteCustomer")]
+        public async Task<IActionResult> DeleteCustomer(int id)
+        {
+            try
+            {
+                await _employeeService.DeleteCustomer(id);
+
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
             }
         }
     }

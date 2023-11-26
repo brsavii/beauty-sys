@@ -17,6 +17,12 @@ namespace Domain.Services
 
         public async Task CreateEmployee(CreateEmployeeRequest createEmployeeRequest)
         {
+            if (!ValidateCpf(createEmployeeRequest.Cpf))
+                throw new InvalidOperationException("CPF Inválido");
+
+            if (await _employeeRepository.HasEmployeeWithSameCpf(createEmployeeRequest.Cpf))
+                throw new InvalidOperationException("Já existe um funcionário com esse CPF");
+
             var employee = new Employee
             {
                 Name = createEmployeeRequest.Name,
@@ -27,17 +33,13 @@ namespace Domain.Services
 
             await _employeeRepository.SaveAsync(employee);
         }
-        public async Task<EmployeeResponse> GetById(int id)
-        {
-            var employee = await _employeeRepository.GetById(id) ?? throw new InvalidOperationException("Nenhum funcionário encontrado.");
 
-            var employeeResponse = new EmployeeResponse(employee.EmployeeId, employee.Name, employee.Cpf, employee.Office);
-
-            return employeeResponse;
-        }
-        public ICollection<EmployeeResponse> GetEmployees()
+        public ICollection<EmployeeResponse> GetEmployees(int currentPage, int takeQuantity = 10)
         {
-            var employees = _employeeRepository.GetAll(1, 2);
+            var employees = _employeeRepository.GetAll(currentPage, takeQuantity);
+
+            if (!employees.Any())
+                throw new InvalidOperationException("Nenhum funcionário encontrado");
 
             var employeeResponse = new List<EmployeeResponse>();
 
@@ -62,6 +64,54 @@ namespace Domain.Services
             employee.UpdatedAt = DateTime.Now;
 
             await _employeeRepository.UpdateAsync(employee);
+        }
+
+        public async Task DeleteCustomer(int id) => await _employeeRepository.Delete(id);
+
+        private static bool ValidateCpf(string cpf)
+        {
+            var multiplicador1 = new int[9] { 10, 9, 8, 7, 6, 5, 4, 3, 2 };
+            var multiplicador2 = new int[10] { 11, 10, 9, 8, 7, 6, 5, 4, 3, 2 };
+
+            cpf = cpf.Trim().Replace(".", "").Replace("-", "");
+
+            if (cpf.Length != 11)
+                return false;
+
+            for (int j = 0; j < 10; j++)
+                if (j.ToString().PadLeft(11, char.Parse(j.ToString())) == cpf)
+                    return false;
+
+            var tempCpf = cpf[..9];
+            var soma = 0;
+
+            for (int i = 0; i < 9; i++)
+                soma += int.Parse(tempCpf[i].ToString()) * multiplicador1[i];
+
+            var resto = soma % 11;
+
+            if (resto < 2)
+                resto = 0;
+            else
+                resto = 11 - resto;
+
+            var digito = resto.ToString();
+            tempCpf += digito;
+            soma = 0;
+
+            for (int i = 0; i < 10; i++)
+                soma += int.Parse(tempCpf[i].ToString()) * multiplicador2[i];
+
+            resto = soma % 11;
+
+            if (resto < 2)
+                resto = 0;
+            else
+                resto = 11 - resto;
+
+            digito += resto.ToString();
+
+            return cpf.EndsWith(digito);
         }
     }
 }
