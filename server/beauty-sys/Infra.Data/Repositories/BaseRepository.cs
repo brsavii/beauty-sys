@@ -1,6 +1,7 @@
 ﻿using Domain.Interfaces.Repositories;
 using Infra.Data.Context;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Identity.Client;
 
 namespace Infra.Data.Repositories
 {
@@ -33,11 +34,12 @@ namespace Infra.Data.Repositories
 
         public async Task Delete(int id)
         {
-            var modelObject = await GetById(id);
-            if (modelObject != null)
-                _typedContext.Remove(modelObject);
+            var modelObject = await GetById(id)
+                ?? throw new InvalidOperationException("Nenhuma entidade encontrada");
 
-            _context.SaveChanges();
+           _typedContext.Remove(modelObject);
+
+           _context.SaveChanges();
         }
 
         public IQueryable<T> GetAll(int currentPage, int takeQuantity = 10)

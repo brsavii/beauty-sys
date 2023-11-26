@@ -19,7 +19,7 @@ namespace Presentation.Controllers
         }
 
         [HttpGet("GetEmployees")]
-        public IActionResult GetEmployees()
+        public IActionResult GetEmployees(int currentPage, int takeQuantity = 10)
         {
             try
             {

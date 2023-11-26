@@ -42,7 +42,7 @@ namespace Presentation.Controllers
             }
             catch (Exception ex)
             {
-                return BadRequest($"Erro ao deletar cliente: {ex.Message}");
+                return BadRequest(ex.Message);
             }
         }
 
@@ -57,7 +57,7 @@ namespace Presentation.Controllers
             }
             catch (Exception ex)
             {
-                return BadRequest($"Erro ao atualizar: {ex.Message}");
+                return BadRequest(ex.Message);
             }
         }
 
@@ -73,7 +73,7 @@ namespace Presentation.Controllers
             }
             catch (Exception ex)
             {
-                return BadRequest($"Erro ao cadastrar novo cliente: {ex.Message}");
+                return BadRequest(ex.Message);
             }
         }
     }

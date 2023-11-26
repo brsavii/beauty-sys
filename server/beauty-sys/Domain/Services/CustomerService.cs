@@ -16,6 +16,9 @@ namespace Domain.Services
 
         public async Task CreateCustomer(CreateCustomerRequest createCustomerRequest)
         {
+            if (createCustomerRequest.Phone.Length != 11)
+                throw new InvalidOperationException("Telefone inválido");
+
             var customer = new Customer
             {
                 Name = createCustomerRequest.Name,
@@ -48,7 +51,7 @@ namespace Domain.Services
 
         public async Task UpdateCustomer(int id, UpdateCustomerRequest updateCustomerRequest)
         {
-            var customer = await _customerRepository.GetById(id) ?? throw new InvalidOperationException("Nenhum cliente encontrado.");
+            var customer = await _customerRepository.GetById(id) ?? throw new InvalidOperationException("Nenhum cliente encontrado");
 
             if (updateCustomerRequest.Name != null)
                 customer.Name = updateCustomerRequest.Name;
