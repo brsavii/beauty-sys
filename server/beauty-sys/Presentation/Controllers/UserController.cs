@@ -1,10 +1,11 @@
 ﻿using Domain.Interfaces.Services;
 using Domain.Objects.Requests;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Presentation.Controllers
 {
-    [ApiController]
+    [ApiController, Authorize]
     [Route("User")]
     public class UserController : ControllerBase
     {
@@ -47,7 +48,7 @@ namespace Presentation.Controllers
         }
 
         [HttpGet("GetUsers")]
-        public IActionResult GetUsers(int currentPage, int takeQuantity = 10)
+        public IActionResult GetUsers(int currentPage = 1, int takeQuantity = 10)
         {
             try
             {
@@ -74,7 +75,7 @@ namespace Presentation.Controllers
             }
         }
 
-        [HttpPost("LogIn")]
+        [HttpPost("LogIn"), AllowAnonymous]
         public IActionResult LogIn(LogInRequest logInRequest)
         {
             try

@@ -29,7 +29,7 @@ namespace Domain.Services
 
         public async Task DeleteCustomer(int id) => await _customerRepository.Delete(id);
 
-        public ICollection<CustomerResponse> GetCustomers(int currentPage, int takeQuantity = 10)
+        public ICollection<CustomerResponse> GetCustomers(int currentPage, int takeQuantity)
         {
             var customers = _customerRepository.GetAll(currentPage, takeQuantity);
 

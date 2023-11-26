@@ -34,7 +34,7 @@ namespace Domain.Services
             await _employeeRepository.SaveAsync(employee);
         }
 
-        public ICollection<EmployeeResponse> GetEmployees(int currentPage, int takeQuantity = 10)
+        public ICollection<EmployeeResponse> GetEmployees(int currentPage, int takeQuantity)
         {
             var employees = _employeeRepository.GetAll(currentPage, takeQuantity);
 

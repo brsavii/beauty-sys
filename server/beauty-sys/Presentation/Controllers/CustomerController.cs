@@ -1,11 +1,12 @@
 ﻿using Application.Interfaces;
 using Domain.Interfaces.Services;
 using Domain.Objects.Requests;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Presentation.Controllers
 {
-    [ApiController]
+    [ApiController, Authorize]
     [Route("Customer")]
     public class CustomerController : ControllerBase
     {
@@ -19,7 +20,7 @@ namespace Presentation.Controllers
         }
 
         [HttpGet("GetCustomers")]
-        public IActionResult GetCustomers(int currentPage, int takeQuantity = 10)
+        public IActionResult GetCustomers(int currentPage = 1, int takeQuantity = 10)
         {
             try
             {

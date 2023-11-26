@@ -1,11 +1,12 @@
 ﻿using Application.Interfaces;
 using Domain.Interfaces.Services;
 using Domain.Objects.Requests;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Presentation.Controllers
 {
-    [ApiController]
+    [ApiController, Authorize]
     [Route("Scheduling")]
     public class SchedulingController : ControllerBase
     {

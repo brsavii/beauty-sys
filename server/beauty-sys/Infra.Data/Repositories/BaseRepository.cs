@@ -41,7 +41,7 @@ namespace Infra.Data.Repositories
             _context.SaveChanges();
         }
 
-        public IQueryable<T> GetAll(int currentPage, int takeQuantity = 10)
+        public IQueryable<T> GetAll(int currentPage, int takeQuantity)
         {
             if (currentPage < 1)
                 throw new InvalidOperationException("A página atual não poder ser menor que 1");
