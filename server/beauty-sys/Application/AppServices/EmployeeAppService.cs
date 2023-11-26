@@ -13,7 +13,6 @@ namespace Application.AppServices
         }
         public async Task UpdateEmployee(int id, UpdateEmployeeRequest updateEmployeeRequest)
         {
-
             if (updateEmployeeRequest.Name == null && updateEmployeeRequest.Office == null)
                 throw new InvalidOperationException("Nenhuma modificação foi realizada!");
 

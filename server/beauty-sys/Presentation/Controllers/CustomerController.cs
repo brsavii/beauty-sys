@@ -62,7 +62,7 @@ namespace Presentation.Controllers
         }
 
         [HttpPost("SaveCustomer")]
-        public async Task<IActionResult> SaveCustomer([FromBody] CreateCustomerRequest createCustomerRequest)
+        public async Task<IActionResult> SaveCustomer(CreateCustomerRequest createCustomerRequest)
         {
             try
             {

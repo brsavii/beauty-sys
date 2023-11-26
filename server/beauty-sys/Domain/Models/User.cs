@@ -8,6 +8,5 @@ namespace Domain.Models
         public int UserId { get; set; }
         public required string Name { get; set; }
         public required string Password { get; set; }
-        public bool IsAdmin { get; set; }
     }
 }

@@ -37,6 +37,8 @@ namespace Application.AutoMapper
                 .ForMember(g => g.ProcedureName, opts => opts.MapFrom(p => p.Name));
 
             CreateProjection<Procedure, ProcedureResponse>();
+
+            CreateProjection<User, UserResponse>();
         }
     }
 }

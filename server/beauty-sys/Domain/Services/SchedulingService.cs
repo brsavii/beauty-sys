@@ -107,6 +107,9 @@ namespace Domain.Services
                 scheduling.Procedure = procedure;
             }
 
+            if (updateSchedulingRequest.StartDate.HasValue)
+                scheduling.StartDate = updateSchedulingRequest.StartDate.Value;
+
             scheduling.UpdatedAt = DateTime.Now;
 
             await _schedulingRepository.UpdateAsync(scheduling);

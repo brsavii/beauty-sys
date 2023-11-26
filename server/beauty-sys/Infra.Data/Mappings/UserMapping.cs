@@ -20,9 +20,6 @@ namespace Infra.Data.Mappings
                 .IsRequired()
                 .HasMaxLength(50);
 
-            builder.Property(c => c.IsAdmin)
-                .IsRequired();
-
             builder.Property(c => c.InsertedAt)
                 .IsRequired();
 
