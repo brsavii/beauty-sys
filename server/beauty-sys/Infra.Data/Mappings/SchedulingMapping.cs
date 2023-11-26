@@ -12,15 +12,15 @@ namespace Infra.Data.Mappings
 
             builder.HasKey(s => s.SchedulingId);
 
-            builder.Property(s => s.StartDate)
+            builder.Property(s => s.StartDateTime)
                 .IsRequired();
 
             builder.Property(s => s.CustomerId)
                 .IsRequired();
 
             builder.HasOne(s => s.Customer)
-                .WithOne(c => c.Scheduling)
-                .HasForeignKey<Scheduling>(s => s.CustomerId);
+                .WithMany(c => c.Schedulings)
+                .HasForeignKey(s => s.CustomerId);
 
             builder.HasOne(s => s.Employee)
                 .WithMany(e => e.Schedulings)

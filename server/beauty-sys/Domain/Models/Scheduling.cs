@@ -6,7 +6,7 @@ namespace Domain.Models
     public class Scheduling : BaseModel
     {
         public int SchedulingId { get; set; }
-        public DateTime StartDate { get; set; }
+        public DateTime StartDateTime { get; set; }
         public int CustomerId { get; set; }
         public int EmployeeId { get; set; }
         public int ProcedureId { get; set; }

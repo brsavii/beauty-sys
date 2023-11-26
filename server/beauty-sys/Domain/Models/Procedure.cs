@@ -7,6 +7,7 @@ namespace Domain.Models
         public int ProcedureId { get; set; }
         public required string Name { get; set; }
         public decimal Value { get; set; }
+        public int ProcedureTime { get; set; }
 
         public virtual ICollection<Scheduling>? Schedulings { get; set; }
     }

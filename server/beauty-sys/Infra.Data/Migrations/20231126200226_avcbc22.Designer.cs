@@ -4,6 +4,7 @@ using Infra.Data.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Infra.Data.Migrations
 {
     [DbContext(typeof(ConfigContext))]
-    partial class ConfigContextModelSnapshot : ModelSnapshot
+    [Migration("20231126200226_avcbc22")]
+    partial class avcbc22
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -149,7 +152,8 @@ namespace Infra.Data.Migrations
 
                     b.HasKey("SchedulingId");
 
-                    b.HasIndex("CustomerId");
+                    b.HasIndex("CustomerId")
+                        .IsUnique();
 
                     b.HasIndex("EmployeeId");
 
@@ -190,8 +194,8 @@ namespace Infra.Data.Migrations
             modelBuilder.Entity("Domain.Models.Scheduling", b =>
                 {
                     b.HasOne("Domain.Models.Customer", "Customer")
-                        .WithMany("Schedulings")
-                        .HasForeignKey("CustomerId")
+                        .WithOne("Scheduling")
+                        .HasForeignKey("Domain.Models.Scheduling", "CustomerId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -216,7 +220,7 @@ namespace Infra.Data.Migrations
 
             modelBuilder.Entity("Domain.Models.Customer", b =>
                 {
-                    b.Navigation("Schedulings");
+                    b.Navigation("Scheduling");
                 });
 
             modelBuilder.Entity("Domain.Models.Employee", b =>

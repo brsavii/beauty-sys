@@ -23,24 +23,27 @@ namespace Domain.Services
 
         public async Task SaveScheduling(CreateSchedulingRequest createSchedulingRequest)
         {
+            if (await _schedulingRepository.HasAnyConflict(createSchedulingRequest))
+                throw new InvalidOperationException("Existe um uncionário ou cliente em conflito com esses horários");
+
             var customer = await _customerRepository.GetById(createSchedulingRequest.CustomerId)
                 ?? throw new InvalidOperationException("Nenhum cliente encontrado");
 
-            var employeeId = createSchedulingRequest.EmployeeId;
-            var procedureId = createSchedulingRequest.ProcedureId;
-
-            var employee = await _employeeRepository.GetById(employeeId)
+            var employee = await _employeeRepository.GetById(createSchedulingRequest.EmployeeId)
                 ?? throw new InvalidOperationException("Nenhum funcionário encontrado");
 
-            var procedure = await _procedureRepository.GetById(procedureId)
+            var procedure = await _procedureRepository.GetById(createSchedulingRequest.ProcedureId)
                 ?? throw new InvalidOperationException("Nenhum procedimento encontrado");
 
             var scheduling = new Scheduling
             {
-                StartDate = createSchedulingRequest.StartDate,
+                StartDateTime = createSchedulingRequest.StartDateTime,
                 Customer = customer,
+                CustomerId = customer.CustomerId,
                 Employee = employee,
+                EmployeeId = employee.EmployeeId,
                 Procedure = procedure,
+                ProcedureId = procedure.ProcedureId,
                 InsertedAt = DateTime.Now
             };
 
@@ -89,6 +92,13 @@ namespace Domain.Services
         {
             var scheduling = await _schedulingRepository.GetById(id) ?? throw new InvalidOperationException("Nenhum agendamento encontrado");
 
+            var startDateTimeToCheck = updateSchedulingRequest.StartDateTime ?? scheduling.StartDateTime;
+            var customerIdToCheck = updateSchedulingRequest.CustomerId ?? scheduling.CustomerId;
+            var employeeIdToCheck = updateSchedulingRequest.EmployeeId ?? scheduling.EmployeeId;
+
+            if (await _schedulingRepository.HasAnyConflict(startDateTimeToCheck, scheduling.SchedulingId, customerIdToCheck, employeeIdToCheck))
+                throw new InvalidOperationException("Existe um uncionário ou cliente em conflito com esses horários");
+
             if (updateSchedulingRequest.CustomerId.HasValue)
             {
                 var customer = await _customerRepository.GetById(updateSchedulingRequest.CustomerId.Value) ?? throw new InvalidOperationException("Nenhum cliente encontrado");
@@ -107,8 +117,8 @@ namespace Domain.Services
                 scheduling.Procedure = procedure;
             }
 
-            if (updateSchedulingRequest.StartDate.HasValue)
-                scheduling.StartDate = updateSchedulingRequest.StartDate.Value;
+            if (updateSchedulingRequest.StartDateTime.HasValue)
+                scheduling.StartDateTime = updateSchedulingRequest.StartDateTime.Value;
 
             scheduling.UpdatedAt = DateTime.Now;
 
@@ -149,5 +159,6 @@ namespace Domain.Services
 
             return daysInMonth;
         }
+
     }
 }

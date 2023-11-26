@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using Domain.Interfaces.Repositories;
 using Domain.Models;
+using Domain.Objects.Requests;
 using Domain.Objects.Responses;
 using Infra.Data.Context;
 using Microsoft.EntityFrameworkCore;
@@ -21,7 +22,7 @@ namespace Infra.Data.Repositories
             return _mapper.ProjectTo<GetSchedulingsToCalendarResponse>(_typedContext
                 .AsNoTracking()
                 .Include(s => s.Customer)
-                .Where(s => s.StartDate.Month == month && s.StartDate.Year == year));
+                .Where(s => s.StartDateTime.Month == month && s.StartDateTime.Year == year));
         }
 
         public SchedulingDetailsIds GetSchedulingDetailIds(int schedulingId)
@@ -32,6 +33,27 @@ namespace Infra.Data.Repositories
                 .Include(s => s.Employee)
                 .Include(s => s.Procedure)
                 .Where(s => s.SchedulingId == schedulingId));
+        }
+
+        public async Task<bool> HasAnyConflict(CreateSchedulingRequest createSchedulingRequest)
+        {
+            return await _typedContext
+                .AsNoTracking()
+                .Include(s => s.Procedure)
+                .AnyAsync(s => (s.EmployeeId == createSchedulingRequest.EmployeeId || s.CustomerId == createSchedulingRequest.CustomerId) &&
+                    (s.StartDateTime.AddMinutes(s.Procedure.ProcedureTime * -1) <= createSchedulingRequest.StartDateTime &&
+                    s.StartDateTime.AddMinutes(s.Procedure.ProcedureTime) >= createSchedulingRequest.StartDateTime));
+        }
+
+        public async Task<bool> HasAnyConflict(DateTime startDateTime, int schedulingId, int customerId, int employeeId)
+        {
+            return await _typedContext
+                .AsNoTracking()
+                .Where(s => s.SchedulingId != schedulingId)
+                .Include(s => s.Procedure)
+                .AnyAsync(s => (s.EmployeeId == employeeId || s.CustomerId == customerId) &&
+                    (s.StartDateTime.AddMinutes(s.Procedure.ProcedureTime * -1) <= startDateTime &&
+                    s.StartDateTime.AddMinutes(s.Procedure.ProcedureTime) >= startDateTime));
         }
     }
 }

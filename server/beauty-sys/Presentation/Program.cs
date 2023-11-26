@@ -95,7 +95,7 @@ builder.Services.AddRateLimiter(opt =>
                 factory: partition => new FixedWindowRateLimiterOptions
                 {
                     AutoReplenishment = true,
-                    PermitLimit = 5,
+                    PermitLimit = 30,
                     QueueLimit = 0, // Number of the pending requests that should keep waiting until the end of the specified time
                     Window = TimeSpan.FromMinutes(1)
                 }));

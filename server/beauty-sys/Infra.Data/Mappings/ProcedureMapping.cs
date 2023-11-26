@@ -20,6 +20,9 @@ namespace Infra.Data.Mappings
                 .IsRequired()
                 .HasPrecision(5, 2);
 
+            builder.Property(p => p.ProcedureTime)
+               .IsRequired();
+
             builder.Property(p => p.InsertedAt)
                 .IsRequired();
 

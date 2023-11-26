@@ -9,6 +9,6 @@ namespace Domain.Models
         public required string Phone { get; set; }
         public required string Description { get; set; }
 
-        public virtual Scheduling? Scheduling { get; set; }
+        public virtual ICollection<Scheduling>? Schedulings { get; set; }
     }
 }

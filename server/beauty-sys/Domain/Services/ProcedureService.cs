@@ -42,6 +42,9 @@ namespace Domain.Services
             if (updateProcedureRequest.Value != null)
                 procedure.Value = updateProcedureRequest.Value.Value;
 
+            if (updateProcedureRequest.ProcedureTime != null)
+                procedure.ProcedureTime = updateProcedureRequest.ProcedureTime.Value;
+
             procedure.UpdatedAt = DateTime.Now;
 
             await _procedureRepository.UpdateAsync(procedure);

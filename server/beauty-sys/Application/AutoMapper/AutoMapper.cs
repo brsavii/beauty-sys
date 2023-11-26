@@ -19,7 +19,7 @@ namespace Application.AutoMapper
                 .ForMember(p => p.InsertedAt, opts => opts.MapFrom(c => DateTime.Now));
 
             CreateProjection<Scheduling, GetSchedulingsToCalendarResponse>()
-                .ForMember(g => g.Day, opts => opts.MapFrom(s => s.StartDate.Day))
+                .ForMember(g => g.Day, opts => opts.MapFrom(s => s.StartDateTime.Day))
                 .ForMember(g => g.DailySchedules, opts => opts.MapFrom(s => s.Customer));
 
             CreateProjection<Customer, DailySchedule>()
