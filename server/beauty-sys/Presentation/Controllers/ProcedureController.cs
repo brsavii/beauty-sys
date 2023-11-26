@@ -1,4 +1,5 @@
-﻿using Domain.Interfaces.Services;
+﻿using Application.Interfaces;
+using Domain.Interfaces.Services;
 using Domain.Objects.Requests;
 using Microsoft.AspNetCore.Mvc;
 
@@ -8,11 +9,26 @@ namespace Presentation.Controllers
     [Route("User")]
     public class ProcedureController : ControllerBase
     {
+        private readonly IProcedureAppService _procedureAppService;
         private readonly IProcedureService _procedureService;
 
-        public ProcedureController(IProcedureService procedureService)
+        public ProcedureController(IProcedureAppService procedureAppService, IProcedureService procedureService)
         {
+            _procedureAppService = procedureAppService;
             _procedureService = procedureService;
+        }
+
+        [HttpGet("GetProcedures")]
+        public IActionResult GetProcedures(int currentPage, int takeQuantity = 10)
+        {
+            try
+            {
+                return Ok(_procedureService.GetProcedures(currentPage, takeQuantity));
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
         }
 
         [HttpPost("SaveProcedure")]
@@ -28,6 +44,36 @@ namespace Presentation.Controllers
             catch (Exception ex)
             {
                 return BadRequest($"Erro ao cadastrar novo procedimento: {ex.Message}");
+            }
+        }
+
+        [HttpPatch("UpdateProcedure")]
+        public async Task<IActionResult> UpdateProcedure(int id, UpdateProcedureRequest updateProcedureRequest)
+        {
+            try
+            {
+                await _procedureAppService.UpdateProcedure(id, updateProcedureRequest);
+
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
+        [HttpDelete("DeleteProcedure")]
+        public async Task<IActionResult> DeleteProcedure(int id)
+        {
+            try
+            {
+                await _procedureService.DeleteProcedure(id);
+
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
             }
         }
     }

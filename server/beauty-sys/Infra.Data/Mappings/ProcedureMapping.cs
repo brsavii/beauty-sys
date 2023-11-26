@@ -18,7 +18,7 @@ namespace Infra.Data.Mappings
 
             builder.Property(p => p.Value)
                 .IsRequired()
-                .HasPrecision(4, 2);
+                .HasPrecision(5, 2);
 
             builder.Property(p => p.InsertedAt)
                 .IsRequired();

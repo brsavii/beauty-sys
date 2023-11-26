@@ -66,7 +66,7 @@ namespace Presentation.Controllers
         {
             try
             {
-                await _customerService.CreateCustomer(createCustomerRequest);
+                await _customerAppService.CreateCustomer(createCustomerRequest);
 
                 return Ok();
 

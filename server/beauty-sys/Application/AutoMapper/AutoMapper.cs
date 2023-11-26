@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Domain.Models;
+using Domain.Objects.Reponses;
 using Domain.Objects.Requests;
 using Domain.Objects.Responses;
 
@@ -34,6 +35,8 @@ namespace Application.AutoMapper
 
             CreateProjection<Procedure, ProcedureBasicInfo>()
                 .ForMember(g => g.ProcedureName, opts => opts.MapFrom(p => p.Name));
+
+            CreateProjection<Procedure, ProcedureResponse>();
         }
     }
 }

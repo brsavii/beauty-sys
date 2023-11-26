@@ -16,9 +16,6 @@ namespace Domain.Services
 
         public async Task CreateCustomer(CreateCustomerRequest createCustomerRequest)
         {
-            if (createCustomerRequest.Phone.Length != 11)
-                throw new InvalidOperationException("Telefone inválido");
-
             var customer = new Customer
             {
                 Name = createCustomerRequest.Name,
