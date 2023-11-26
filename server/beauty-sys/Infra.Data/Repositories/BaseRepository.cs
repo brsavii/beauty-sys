@@ -40,9 +40,15 @@ namespace Infra.Data.Repositories
             _context.SaveChanges();
         }
 
-        public IQueryable<T> GetAll()
+        public IQueryable<T> GetAll(int currentPage, int takeQuantity = 10)
         {
-            return _typedContext;
+            if (currentPage < 1)
+                throw new InvalidOperationException("A página atual não poder ser menor que 1");
+
+            return _typedContext
+                .AsNoTracking()
+                .Skip((currentPage - 1) * takeQuantity)
+                .Take(takeQuantity);
         }
 
         public async void Dispose() => await _context.DisposeAsync();

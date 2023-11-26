@@ -29,18 +29,12 @@ namespace Domain.Services
 
         public async Task DeleteCustomer(int id) => await _customerRepository.Delete(id);
 
-        public async Task<CustomerResponse> GetById(int id)
+        public ICollection<CustomerResponse> GetCustomers(int currentPage, int takeQuantity = 10)
         {
-            var customers = await _customerRepository.GetById(id) ?? throw new InvalidOperationException("Nenhum cliente encontrado.");
+            var customers = _customerRepository.GetAll(currentPage, takeQuantity);
 
-            var customerResponse = new CustomerResponse(customers.CustomerId, customers.Name, customers.Phone, customers.Description);
-
-            return customerResponse;
-        }
-
-        public List<CustomerResponse> GetCustomers()
-        {
-            var customers = _customerRepository.GetAll();
+            if (!customers.Any())
+                throw new InvalidOperationException("Nenhum cliente encontrado");
 
             var customerResponse = new List<CustomerResponse>();
 

@@ -5,8 +5,7 @@ namespace Domain.Interfaces.Services
 {
     public interface ICustomerService
     {
-        List<CustomerResponse> GetCustomers();
-        Task<CustomerResponse> GetById(int id);
+        ICollection<CustomerResponse> GetCustomers(int currentPage, int takeQuantity = 10);
         Task DeleteCustomer(int id);
         Task UpdateCustomer(int id, UpdateCustomerRequest updateCustomerRequest);
         Task CreateCustomer(CreateCustomerRequest createCustomerRequest);

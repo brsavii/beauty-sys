@@ -35,9 +35,9 @@ namespace Domain.Services
 
             return employeeResponse;
         }
-        public List<EmployeeResponse> GetEmployees()
+        public ICollection<EmployeeResponse> GetEmployees()
         {
-            var employees = _employeeRepository.GetAll();
+            var employees = _employeeRepository.GetAll(1, 2);
 
             var employeeResponse = new List<EmployeeResponse>();
 

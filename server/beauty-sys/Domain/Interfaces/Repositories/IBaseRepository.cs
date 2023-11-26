@@ -5,7 +5,7 @@
         Task<int> SaveAsync(T modelObject);
         Task<int> UpdateAsync(T modelObject);
         Task<T?> GetById(int id);
-        IQueryable<T> GetAll();
+        IQueryable<T> GetAll(int currentPage, int takeQuantity = 10);
         Task Delete(int id);
     }
 }

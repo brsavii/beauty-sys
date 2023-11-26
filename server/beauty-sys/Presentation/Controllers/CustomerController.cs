@@ -19,24 +19,11 @@ namespace Presentation.Controllers
         }
 
         [HttpGet("GetCustomers")]
-        public IActionResult GetCustomers()
+        public IActionResult GetCustomers(int currentPage, int takeQuantity = 10)
         {
             try
             {
-                return Ok(_customerService.GetCustomers());
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(ex.Message);
-            }
-        }
-
-        [HttpGet("GetById")]
-        public async Task<IActionResult> GetById(int id)
-        {
-            try
-            {
-                return Ok(await _customerService.GetById(id));
+                return Ok(_customerService.GetCustomers(currentPage, takeQuantity));
             }
             catch (Exception ex)
             {

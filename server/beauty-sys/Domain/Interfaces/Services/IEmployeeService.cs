@@ -5,7 +5,7 @@ namespace Domain.Interfaces.Services
 {
     public interface IEmployeeService
     {
-        List<EmployeeResponse> GetEmployees();
+        ICollection<EmployeeResponse> GetEmployees();
         Task<EmployeeResponse> GetById(int id);
         Task UpdateEmployee(int id, UpdateEmployeeRequest updateEmployeeRequest);
         Task CreateEmployee(CreateEmployeeRequest createEmploeeRequest);
