@@ -14,7 +14,7 @@ namespace Domain.Objects.Responses
         public required CustomerBasicInfo CustomerBasicInfo { get; set; }
         public required EmployeeBasicInfo EmployeeBasicInfo { get; set; }
         public required ProcedureBasicInfo ProcedureBasicInfo { get; set; }
-        public virtual required SalonBasicInfo SalonBasicInfo { get; set; } // fazer esse
-        public virtual required PaymentBasicInfo PaymentBasicInfo { get; set; } // fazer esse// fazer esse
+        public virtual required SalonBasicInfo SalonBasicInfo { get; set; }
+        public virtual required PaymentBasicInfo PaymentBasicInfo { get; set; } 
     }
 }
