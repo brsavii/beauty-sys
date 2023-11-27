@@ -23,7 +23,7 @@ namespace Presentation.Controllers
             {
                 await _userService.SaveUser(createCustomerRequest);
 
-                return Ok();
+                return Ok("Usuário salvo com sucesso");
 
             }
             catch (Exception ex)
@@ -39,7 +39,7 @@ namespace Presentation.Controllers
             {
                 await _userService.UpdateUser(id, updateUserRequest);
 
-                return Ok();
+                return Ok("Usuário atualizado com sucesso");
             }
             catch (Exception ex)
             {
@@ -67,7 +67,7 @@ namespace Presentation.Controllers
             {
                 await _userService.DeleteUser(id);
 
-                return Ok();
+                return Ok("Usuário deletado com sucesso");
             }
             catch (Exception ex)
             {

@@ -36,7 +36,7 @@ namespace Presentation.Controllers
             {
                 await _jobPositionService.UpdateJobPosition(id, updateJobPositionRequest);
 
-                return Ok();
+                return Ok("Cargo atualizado com sucesso");
             }
             catch (Exception ex)
             {
@@ -51,8 +51,7 @@ namespace Presentation.Controllers
             {
                 await _jobPositionService.SaveJobPosition(CreateJobPositionRequest);
 
-                return Ok();
-
+                return Ok("Cargo salvo com sucesso");
             }
             catch (Exception ex)
             {

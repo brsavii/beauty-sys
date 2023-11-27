@@ -39,7 +39,7 @@ namespace Presentation.Controllers
             {
                 await _procedureService.SaveProcedure(createProcedureRequest);
 
-                return Ok();
+                return Ok("Procedimento salvo com sucesso");
 
             }
             catch (Exception ex)
@@ -55,7 +55,7 @@ namespace Presentation.Controllers
             {
                 await _procedureAppService.UpdateProcedure(id, updateProcedureRequest);
 
-                return Ok();
+                return Ok("Procedimento atualizado com sucesso");
             }
             catch (Exception ex)
             {
@@ -70,7 +70,7 @@ namespace Presentation.Controllers
             {
                 await _procedureService.DeleteProcedure(id);
 
-                return Ok();
+                return Ok("Procedimento deletado com sucesso");
             }
             catch (Exception ex)
             {

@@ -39,7 +39,7 @@ namespace Presentation.Controllers
             {
                 await _employeeService.CreateEmployee(createEmployeeRequest);
 
-                return Ok();
+                return Ok("Funcionário salvo com sucesso");
 
             }
             catch (Exception ex)
@@ -55,7 +55,7 @@ namespace Presentation.Controllers
             {
                 await _employeeAppService.UpdateEmployee(id, updateEmployeeRequest);
 
-                return Ok();
+                return Ok("Funcionário atualizado com sucesso");
             }
             catch (Exception ex)
             {
@@ -71,7 +71,7 @@ namespace Presentation.Controllers
             {
                 await _employeeService.DeleteCustomer(id);
 
-                return Ok();
+                return Ok("Funcionário deletado com sucesso");
             }
             catch (Exception ex)
             {

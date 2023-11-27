@@ -39,7 +39,7 @@ namespace Presentation.Controllers
             {
                 await _customerService.DeleteCustomer(id);
 
-                return Ok();
+                return Ok("Cliente deletado com sucesso");
             }
             catch (Exception ex)
             {
@@ -54,7 +54,7 @@ namespace Presentation.Controllers
             {
                 await _customerAppService.UpdateCustomer(id, updateCustomerRequest);
 
-                return Ok();
+                return Ok("Cliente atualizado com sucesso");
             }
             catch (Exception ex)
             {
@@ -69,7 +69,7 @@ namespace Presentation.Controllers
             {
                 await _customerAppService.CreateCustomer(createCustomerRequest);
 
-                return Ok();
+                return Ok("Cliente salvo com sucesso");
 
             }
             catch (Exception ex)
