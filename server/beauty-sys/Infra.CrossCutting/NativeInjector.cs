@@ -22,12 +22,14 @@ namespace Infra.CrossCutting
             services.AddScoped<IEmployeeService, EmployeeService>();
             services.AddScoped<IProcedureService, ProcedureService>();
             services.AddScoped<ISchedulingService, SchedulingService>();
+            services.AddScoped<IJobPositionService, JobPositionService>();
 
             services.AddScoped<ICustomerRepository, CustomerRepository>();
             services.AddScoped<IEmployeeRepository, EmployeeRepository>();
             services.AddScoped<IUserRepository, UserRepository>();
             services.AddScoped<ISchedulingRepository, SchedulingRepository>();
             services.AddScoped<IProcedureRepository, ProcedureRepository>();
+            services.AddScoped<IJobPositionRepository, JobPositionRepository>();
         }
     }
 }

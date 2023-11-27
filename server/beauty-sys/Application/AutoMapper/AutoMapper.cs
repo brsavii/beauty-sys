@@ -39,6 +39,11 @@ namespace Application.AutoMapper
             CreateProjection<Procedure, ProcedureResponse>();
 
             CreateProjection<User, UserResponse>();
+
+            CreateMap<CreateJobPositionRequest, JobPosition>()
+                 .ForMember(p => p.InsertedAt, opts => opts.MapFrom(c => DateTime.Now));
+
+            CreateMap<JobPosition, JobPositionResponse>();
         }
     }
 }
