@@ -30,6 +30,14 @@ namespace Infra.Data.Mappings
                 .WithMany(e => e.Schedulings)
                 .HasForeignKey(s => s.ProcedureId);
 
+            builder.HasOne(s => s.Salon)
+                .WithMany(e => e.Schedulings)
+                .HasForeignKey(s => s.SalonId);
+
+            builder.HasOne(s => s.Payment)
+                .WithMany(e => e.Schedulings)
+                .HasForeignKey(s => s.PaymentId);
+
             builder.Property(s => s.InsertedAt)
                 .IsRequired();
 

@@ -4,24 +4,24 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace Infra.Data.Mappings
 {
-    public class SalonMapping : IEntityTypeConfiguration<Salon>
+    public class PaymentMapping : IEntityTypeConfiguration<Payment>
     {
-        public void Configure(EntityTypeBuilder<Salon> builder)
+        public void Configure(EntityTypeBuilder<Payment> builder)
         {
-            builder.ToTable("Salons");
+            builder.ToTable("Payments");
 
-            builder.HasKey(c => c.SalonId);
+            builder.HasKey(c => c.PaymentId);
 
             builder.Property(c => c.Name)
                 .IsRequired()
                 .HasMaxLength(70);
 
-            builder.Property(c => c.Location)
+            builder.Property(c => c.Discount)
                 .IsRequired()
-                .HasMaxLength(70);
+                .HasPrecision(5, 2);
 
             builder.HasMany(e => e.Schedulings)
-               .WithOne(s => s.Salon);
+               .WithOne(s => s.Payment);
 
             builder.Property(c => c.InsertedAt)
                 .IsRequired();

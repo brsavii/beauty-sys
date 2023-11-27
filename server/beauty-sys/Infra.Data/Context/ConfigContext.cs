@@ -16,6 +16,8 @@ namespace Infra.Data.Context
         public DbSet<Scheduling>? Scheduling { get; set; }
         public DbSet<User>? User { get; set; }
         public DbSet<JobPosition>? JobPosition { get; set; }
+        public DbSet<Salon>? Salon { get; set; }
+        public DbSet<Payment>? Payment { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -25,6 +27,8 @@ namespace Infra.Data.Context
             modelBuilder.ApplyConfiguration(new SchedulingMapping());
             modelBuilder.ApplyConfiguration(new UserMapping());
             modelBuilder.ApplyConfiguration(new JobPositionMapping());
+            modelBuilder.ApplyConfiguration(new SalonMapping());
+            modelBuilder.ApplyConfiguration(new PaymentMapping());
 
             base.OnModelCreating(modelBuilder);
         }
