@@ -6,7 +6,7 @@ namespace Domain.Interfaces.Services
     public interface IProcedureService
     {
         Task DeleteProcedure(int id);
-        ICollection<ProcedureResponse> GetProcedures(int currentPage, int takeQuantity);
+        ICollection<ProcedureResponse> GetProcedures(int? id, string? name, int currentPage, int takeQuantity);
         Task SaveProcedure(CreateProcedureRequest createProcedureRequest);
         Task UpdateProcedure(int id, UpdateProcedureRequest updateProcedureRequest);
     }

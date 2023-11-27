@@ -19,7 +19,7 @@ namespace Infra.Data.Repositories
 
         public IQueryable<GetSchedulingsToCalendarResponse> GetSchedulingsToCalendar(int month, int year, int? customerId, int? employeeId, int? procedureId, int? salonId)
         {
-            var query =  _typedContext
+            var query = _typedContext
                 .AsNoTracking()
                 .Include(s => s.Customer)
                 .Where(s => s.StartDateTime.Month == month && s.StartDateTime.Year == year);

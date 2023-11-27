@@ -1,6 +1,5 @@
 ﻿using Application.Interfaces;
 using Domain.Interfaces.Services;
-using Domain.Models;
 using Domain.Objects.Requests;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;

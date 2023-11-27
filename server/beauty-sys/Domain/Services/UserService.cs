@@ -63,14 +63,14 @@ namespace Domain.Services
             await _userRepository.UpdateAsync(user);
         }
 
-        public ICollection<UserResponse> GetUsers(int currentPage, int takeQuantity)
+        public ICollection<UserResponse> GetUsers(int? id, string? name, int currentPage, int takeQuantity)
         {
-            var users = _userRepository.GetAll(currentPage, takeQuantity);
+            var users = _userRepository.GetUsers(id, name, currentPage, takeQuantity);
 
             if (!users.Any())
                 throw new InvalidOperationException("Nenhum usuário encontrado");
 
-            return _mapper.ProjectTo<UserResponse>(users).ToList();
+            return users;
         }
 
         public async Task DeleteUser(int id) => await _userRepository.Delete(id);

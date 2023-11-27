@@ -20,11 +20,11 @@ namespace Presentation.Controllers
         }
 
         [HttpGet("GetProcedures")]
-        public IActionResult GetProcedures(int currentPage = 1, int takeQuantity = 10)
+        public IActionResult GetProcedures(int? id, string? name, int currentPage = 1, int takeQuantity = 10)
         {
             try
             {
-                return Ok(_procedureService.GetProcedures(currentPage, takeQuantity));
+                return Ok(_procedureService.GetProcedures(id, name, currentPage, takeQuantity));
             }
             catch (Exception ex)
             {

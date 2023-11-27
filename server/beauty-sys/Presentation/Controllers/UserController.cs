@@ -48,11 +48,11 @@ namespace Presentation.Controllers
         }
 
         [HttpGet("GetUsers")]
-        public IActionResult GetUsers(int currentPage = 1, int takeQuantity = 10)
+        public IActionResult GetUsers(int? id, string? name, int takeQuantity = 1, int currentPage = 10)
         {
             try
             {
-                return Ok(_userService.GetUsers(currentPage, takeQuantity));
+                return Ok(_userService.GetUsers(id, name, currentPage, takeQuantity));
             }
             catch (Exception ex)
             {

@@ -4,7 +4,6 @@ using Domain.Models;
 using Domain.Objects.Reponses;
 using Domain.Objects.Responses;
 using Infra.Data.Context;
-using Microsoft.IdentityModel.Tokens;
 
 namespace Infra.Data.Repositories
 {

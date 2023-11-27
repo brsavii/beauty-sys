@@ -30,6 +30,7 @@ namespace Infra.CrossCutting
             services.AddScoped<ISchedulingRepository, SchedulingRepository>();
             services.AddScoped<IProcedureRepository, ProcedureRepository>();
             services.AddScoped<IJobPositionRepository, JobPositionRepository>();
+            services.AddScoped<ISalonRepository, SalonRepository>();
         }
     }
 }

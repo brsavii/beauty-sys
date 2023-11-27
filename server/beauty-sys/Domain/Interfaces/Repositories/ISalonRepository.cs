@@ -1,5 +1,4 @@
 ﻿using Domain.Models;
-using Domain.Objects.Responses;
 
 namespace Domain.Interfaces.Repositories
 {

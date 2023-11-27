@@ -20,14 +20,14 @@ namespace Domain.Services
 
         public async Task DeleteProcedure(int id) => await _procedureRepository.Delete(id);
 
-        public ICollection<ProcedureResponse> GetProcedures(int currentPage, int takeQuantity)
+        public ICollection<ProcedureResponse> GetProcedures(int? id, string? name, int currentPage, int takeQuantity)
         {
-            var customers = _procedureRepository.GetAll(currentPage, takeQuantity);
+            var procedures = _procedureRepository.GetProcedures(id, name, currentPage, takeQuantity);
 
-            if (!customers.Any())
-                throw new InvalidOperationException("Nenhuma operação encontrado");
+            if (!procedures.Any())
+                throw new InvalidOperationException("Nenhum procedimento encontrado");
 
-            return _mapper.ProjectTo<ProcedureResponse>(customers).ToList();
+            return procedures;
         }
 
         public async Task SaveProcedure(CreateProcedureRequest createProcedureRequest) => await _procedureRepository.SaveAsync(_mapper.Map<Procedure>(createProcedureRequest));
