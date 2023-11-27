@@ -13,14 +13,16 @@ namespace Domain.Services
         private readonly IEmployeeRepository _employeeRepository;
         private readonly IProcedureRepository _procedureRepository;
         private readonly ISalonRepository _salonRepository;
+        private readonly IPaymentRepository _paymentRepository;
 
-        public SchedulingService(ISchedulingRepository schedulingRepository, ICustomerRepository customerRepository, IEmployeeRepository employeeRepository, IProcedureRepository procedureRepository, ISalonRepository salonRepository)
+        public SchedulingService(ISchedulingRepository schedulingRepository, ICustomerRepository customerRepository, IEmployeeRepository employeeRepository, IProcedureRepository procedureRepository, ISalonRepository salonRepository, IPaymentRepository paymentRepository)
         {
             _schedulingRepository = schedulingRepository;
             _customerRepository = customerRepository;
             _employeeRepository = employeeRepository;
             _procedureRepository = procedureRepository;
             _salonRepository = salonRepository;
+            _paymentRepository = paymentRepository;
         }
 
         public async Task SaveScheduling(CreateSchedulingRequest createSchedulingRequest)
@@ -40,6 +42,9 @@ namespace Domain.Services
             var salon = await _salonRepository.GetById(createSchedulingRequest.SalonId)
                 ?? throw new InvalidOperationException("Nenhum salão encontrado");
 
+            var payment = await _paymentRepository.GetById(createSchedulingRequest.PaymentId)
+                ?? throw new InvalidOperationException("Nenhum pagamento encontrado");
+
             var scheduling = new Scheduling
             {
                 StartDateTime = createSchedulingRequest.StartDateTime,
@@ -50,6 +55,7 @@ namespace Domain.Services
                 Procedure = procedure,
                 ProcedureId = procedure.ProcedureId,
                 Salon = salon,
+                Payment = payment,
                 InsertedAt = DateTime.Now
             };
 
@@ -127,6 +133,12 @@ namespace Domain.Services
             {
                 var salon = await _salonRepository.GetById(updateSchedulingRequest.SalonId.Value) ?? throw new InvalidOperationException("Nenhum salão encontrado");
                 scheduling.Salon = salon;
+            }
+
+            if (updateSchedulingRequest.PaymentId.HasValue)
+            {
+                var payment = await _paymentRepository.GetById(updateSchedulingRequest.PaymentId.Value) ?? throw new InvalidOperationException("Nenhum pagamento encontrado");
+                scheduling.Payment = payment;
             }
 
             if (updateSchedulingRequest.StartDateTime.HasValue)

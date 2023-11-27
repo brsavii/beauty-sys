@@ -8,5 +8,6 @@ namespace Domain.Objects.Requests
         public int EmployeeId { get; set; }
         public int ProcedureId { get; set; }
         public int SalonId { get; set; }
+        public int PaymentId { get; set; }
     }
 }

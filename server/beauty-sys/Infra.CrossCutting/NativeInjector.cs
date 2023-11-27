@@ -31,6 +31,7 @@ namespace Infra.CrossCutting
             services.AddScoped<IProcedureRepository, ProcedureRepository>();
             services.AddScoped<IJobPositionRepository, JobPositionRepository>();
             services.AddScoped<ISalonRepository, SalonRepository>();
+            services.AddScoped<IPaymentRepository, PaymentRepository>();
         }
     }
 }
