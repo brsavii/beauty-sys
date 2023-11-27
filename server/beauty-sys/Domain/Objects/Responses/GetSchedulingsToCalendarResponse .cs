@@ -1,4 +1,6 @@
-﻿namespace Domain.Objects.Responses
+﻿using Domain.Models;
+
+namespace Domain.Objects.Responses
 {
     public record GetSchedulingsToCalendarResponse
     {
@@ -9,7 +11,10 @@
 
     public record DailySchedule
     {
-        public required string CustomerId { get; set; }
-        public required string CustomerName { get; set; }
+        public required CustomerBasicInfo CustomerBasicInfo { get; set; }
+        public required EmployeeBasicInfo EmployeeBasicInfo { get; set; }
+        public required ProcedureBasicInfo ProcedureBasicInfo { get; set; }
+        public virtual required SalonBasicInfo SalonBasicInfo { get; set; } // fazer esse
+        public virtual required PaymentBasicInfo PaymentBasicInfo { get; set; } // fazer esse// fazer esse
     }
 }
