@@ -20,11 +20,11 @@ namespace Presentation.Controllers
         }
 
         [HttpGet("GetEmployees")]
-        public IActionResult GetEmployees(int currentPage = 1, int takeQuantity = 10)
+        public IActionResult GetEmployees(int? id, string? name, int currentPage = 1, int takeQuantity = 10)
         {
             try
             {
-                return Ok(_employeeService.GetEmployees(currentPage, takeQuantity));
+                return Ok(_employeeService.GetEmployees(id, name, currentPage, takeQuantity));
             }
             catch (Exception ex)
             {

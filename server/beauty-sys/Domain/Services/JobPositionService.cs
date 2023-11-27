@@ -18,14 +18,14 @@ namespace Domain.Services
             _mapper = mapper;
         }
 
-        public ICollection<JobPositionResponse> GetJobPositions(int currentPage, int takeQuantity)
+        public ICollection<JobPositionResponse> GetJobPositions(int? id, string? name, int currentPage, int takeQuantity)
         {
-            var jobPositions = _jobPositionRepository.GetAll(currentPage, takeQuantity);
+            var jobPositions = _jobPositionRepository.GetJobPositions(id, name, currentPage, takeQuantity);
 
             if (!jobPositions.Any())
                 throw new InvalidOperationException("Nenhum cargo encontrado");
 
-            return _mapper.ProjectTo<JobPositionResponse>(jobPositions).ToList();
+            return jobPositions;
         }
 
         public async Task SaveJobPosition(CreateJobPositionRequest createJobPositionRequest)

@@ -31,7 +31,7 @@ namespace Domain.Services
 
         public ICollection<CustomerResponse> GetCustomers(int currentPage, int takeQuantity, int? id, string? name)
         {
-            var customers = _customerRepository.GetCustomers(currentPage, takeQuantity, Id, name);
+            var customers = _customerRepository.GetCustomers(currentPage, takeQuantity, id, name);
 
             if (!customers.Any())
                 throw new InvalidOperationException("Nenhum cliente encontrado");

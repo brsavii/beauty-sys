@@ -17,11 +17,11 @@ namespace Presentation.Controllers
         }
 
         [HttpGet("GetJobPositions")]
-        public IActionResult GetJobPositions(int currentPage = 1, int takeQuantity = 10)
+        public IActionResult GetJobPositions(int? id, string? name, int currentPage = 1, int takeQuantity = 10)
         {
             try
             {
-                return Ok(_jobPositionService.GetJobPositions(currentPage, takeQuantity));
+                return Ok(_jobPositionService.GetJobPositions(id, name, currentPage, takeQuantity));
             }
             catch (Exception ex)
             {

@@ -40,21 +40,14 @@ namespace Domain.Services
             await _employeeRepository.SaveAsync(employee);
         }
 
-        public ICollection<EmployeeResponse> GetEmployees(int currentPage, int takeQuantity)
+        public ICollection<EmployeeResponse> GetEmployees(int? id, string? name, int currentPage, int takeQuantity)
         {
-            var employees = _employeeRepository.GetAll(currentPage, takeQuantity);
+            var employees = _employeeRepository.GetEmployees(id, name, currentPage, takeQuantity);
 
             if (!employees.Any())
                 throw new InvalidOperationException("Nenhum funcionário encontrado");
 
-            var employeeResponse = new List<EmployeeResponse>();
-
-            foreach (var employee in employees)
-            {
-                employeeResponse.Add(new EmployeeResponse(employee.EmployeeId, employee.Name, employee.Cpf, employee.Office));
-            }
-
-            return employeeResponse;
+            return employees;
         }
 
         public async Task UpdateEmployee(int id, UpdateEmployeeRequest updateEmployeeRequest)

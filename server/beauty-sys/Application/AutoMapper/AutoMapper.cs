@@ -46,6 +46,10 @@ namespace Application.AutoMapper
             CreateMap<JobPosition, JobPositionResponse>();
 
             CreateMap<Customer, CustomerResponse>();
+
+            CreateMap<Employee, EmployeeResponse>();
+
+            CreateMap<JobPosition, JobPositionResponse>();
         }
     }
 }
