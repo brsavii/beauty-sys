@@ -29,21 +29,14 @@ namespace Domain.Services
 
         public async Task DeleteCustomer(int id) => await _customerRepository.Delete(id);
 
-        public ICollection<CustomerResponse> GetCustomers(int currentPage, int takeQuantity)
+        public ICollection<CustomerResponse> GetCustomers(int currentPage, int takeQuantity, int? id, string? name)
         {
-            var customers = _customerRepository.GetAll(currentPage, takeQuantity);
+            var customers = _customerRepository.GetCustomers(currentPage, takeQuantity, Id, name);
 
             if (!customers.Any())
                 throw new InvalidOperationException("Nenhum cliente encontrado");
 
-            var customerResponse = new List<CustomerResponse>();
-
-            foreach (var customer in customers)
-            {
-                customerResponse.Add(new CustomerResponse(customer.CustomerId, customer.Name, customer.Phone, customer.Description));
-            }
-
-            return customerResponse;
+            return customers;
         }
 
         public async Task UpdateCustomer(int id, UpdateCustomerRequest updateCustomerRequest)

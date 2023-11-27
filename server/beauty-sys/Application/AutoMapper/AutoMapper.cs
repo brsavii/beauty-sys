@@ -44,6 +44,8 @@ namespace Application.AutoMapper
                  .ForMember(p => p.InsertedAt, opts => opts.MapFrom(c => DateTime.Now));
 
             CreateMap<JobPosition, JobPositionResponse>();
+
+            CreateMap<Customer, CustomerResponse>();
         }
     }
 }

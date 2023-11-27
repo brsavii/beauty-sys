@@ -17,12 +17,26 @@ namespace Infra.Data.Repositories
             _mapper = mapper;
         }
 
-        public IQueryable<GetSchedulingsToCalendarResponse> GetSchedulingsToCalendar(int month, int year)
+        public IQueryable<GetSchedulingsToCalendarResponse> GetSchedulingsToCalendar(int month, int year, int? customerId, int? employeeId, int? procedureId, int? salonId)
         {
-            return _mapper.ProjectTo<GetSchedulingsToCalendarResponse>(_typedContext
+            var query =  _typedContext
                 .AsNoTracking()
                 .Include(s => s.Customer)
-                .Where(s => s.StartDateTime.Month == month && s.StartDateTime.Year == year));
+                .Where(s => s.StartDateTime.Month == month && s.StartDateTime.Year == year);
+
+            if (customerId.HasValue)
+                query = query.Where(s => s.CustomerId == customerId.Value);
+
+            if (employeeId.HasValue)
+                query = query.Where(s => s.CustomerId == employeeId.Value);
+
+            if (procedureId.HasValue)
+                query = query.Where(s => s.CustomerId == procedureId.Value);
+
+            if (salonId.HasValue)
+                query = query.Where(s => s.CustomerId == salonId.Value);
+
+            return _mapper.ProjectTo<GetSchedulingsToCalendarResponse>(query);
         }
 
         public SchedulingDetailsIds GetSchedulingDetailIds(int schedulingId)

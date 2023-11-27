@@ -6,7 +6,7 @@ namespace Domain.Interfaces.Services
     public interface ISchedulingService
     {
         Task SaveScheduling(CreateSchedulingRequest createSchedulingRequest);
-        ICollection<GetSchedulingsToCalendarResponse> GetSchedulingsToCalendar(int month, int year);
+        ICollection<GetSchedulingsToCalendarResponse> GetSchedulingsToCalendar(int month, int year, int? customerId, int? employeeId, int? procedureId, int? salonId);
         GetSchedulingDetailResponse GetSchedulingDetail(int schedulingId);
         Task UpdateScheduling(int id, UpdateSchedulingRequest updateSchedulingRequest);
         Task DeleteScheduling(int id);

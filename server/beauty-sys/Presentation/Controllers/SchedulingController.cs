@@ -1,5 +1,6 @@
 ﻿using Application.Interfaces;
 using Domain.Interfaces.Services;
+using Domain.Models;
 using Domain.Objects.Requests;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -65,11 +66,11 @@ namespace Presentation.Controllers
         }
 
         [HttpGet("GetSchedulingsToCalendar")]
-        public IActionResult GetSchedulingsToCalendar(int month, int year)
+        public IActionResult GetSchedulingsToCalendar(int month, int year, int? customerId, int? employeeId, int? procedureId, int? salonId)
         {
             try
             {
-                return Ok(_schedulingService.GetSchedulingsToCalendar(month, year));
+                return Ok(_schedulingService.GetSchedulingsToCalendar(month, year, customerId, employeeId, procedureId, salonId));
             }
             catch (Exception ex)
             {

@@ -19,12 +19,12 @@ namespace Presentation.Controllers
             _customerAppService = customerAppService;
         }
 
-        [HttpGet("GetCustomers")]
-        public IActionResult GetCustomers(int currentPage = 1, int takeQuantity = 10)
+        [HttpGet("GetCustomers/{Id}")]
+        public IActionResult GetCustomers(int? id, string? name, int currentPage = 1, int takeQuantity = 10)
         {
             try
             {
-                return Ok(_customerService.GetCustomers(currentPage, takeQuantity));
+                return Ok(_customerService.GetCustomers(currentPage, takeQuantity, id, name));
             }
             catch (Exception ex)
             {

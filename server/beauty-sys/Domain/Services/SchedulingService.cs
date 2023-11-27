@@ -56,9 +56,9 @@ namespace Domain.Services
             await _schedulingRepository.SaveAsync(scheduling);
         }
 
-        public ICollection<GetSchedulingsToCalendarResponse> GetSchedulingsToCalendar(int month, int year)
+        public ICollection<GetSchedulingsToCalendarResponse> GetSchedulingsToCalendar(int month, int year, int? customerId, int? employeeId, int? procedureId, int? salonId)
         {
-            ICollection<GetSchedulingsToCalendarResponse> schedulings = _schedulingRepository.GetSchedulingsToCalendar(month, year).ToList()
+            ICollection<GetSchedulingsToCalendarResponse> schedulings = _schedulingRepository.GetSchedulingsToCalendar(month, year, customerId, employeeId, procedureId, salonId).ToList()
                 ?? new List<GetSchedulingsToCalendarResponse>();
 
             var daysInMonth = GetDaysInMonth(month, year);
