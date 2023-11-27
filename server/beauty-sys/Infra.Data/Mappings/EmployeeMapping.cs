@@ -25,6 +25,9 @@ namespace Infra.Data.Mappings
                 .HasMaxLength(11)
                 .HasColumnType("char(11)");
 
+            builder.Property(c => c.JobPositionId)
+                .IsRequired();
+
             builder.Property(c => c.InsertedAt)
                 .IsRequired();
 
@@ -33,6 +36,9 @@ namespace Infra.Data.Mappings
 
             builder.HasMany(e => e.Schedulings)
                .WithOne(s => s.Employee);
+
+            builder.HasOne(e => e.JobPosition)
+               .WithMany(s => s.Employees);
         }
     }
 }

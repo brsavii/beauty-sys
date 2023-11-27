@@ -25,6 +25,9 @@ namespace Infra.Data.Mappings
 
             builder.Property(p => p.UpdatedAt)
                 .IsRequired(false);
+
+            builder.HasMany(p => p.Employees)
+               .WithOne(e => e.JobPosition);
         }
     }
 }

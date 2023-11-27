@@ -9,10 +9,12 @@ namespace Domain.Services
     public class EmployeeService : IEmployeeService
     {
         private readonly IEmployeeRepository _employeeRepository;
+        private readonly IJobPositionRepository _jobPositionRepository;
 
-        public EmployeeService(IEmployeeRepository employeeRepository)
+        public EmployeeService(IEmployeeRepository employeeRepository, IJobPositionRepository jobPositionRepository)
         {
             _employeeRepository = employeeRepository;
+            _jobPositionRepository = jobPositionRepository;
         }
 
         public async Task CreateEmployee(CreateEmployeeRequest createEmployeeRequest)
@@ -23,12 +25,16 @@ namespace Domain.Services
             if (await _employeeRepository.HasEmployeeWithSameCpf(createEmployeeRequest.Cpf))
                 throw new InvalidOperationException("Já existe um funcionário com esse CPF");
 
+            var jobPosition = await _jobPositionRepository.GetById(createEmployeeRequest.JobPositionId)
+                ?? throw new InvalidOperationException("Nenhum cargo encontrado");
+
             var employee = new Employee
             {
                 Name = createEmployeeRequest.Name,
                 Office = createEmployeeRequest.Office,
                 Cpf = createEmployeeRequest.Cpf,
-                InsertedAt = DateTime.Now
+                InsertedAt = DateTime.Now,
+                JobPosition = jobPosition
             };
 
             await _employeeRepository.SaveAsync(employee);
@@ -60,6 +66,14 @@ namespace Domain.Services
 
             if (updateEmployeeRequest.Office != null)
                 employee.Office = updateEmployeeRequest.Office;
+
+            if (updateEmployeeRequest.JobPositionId != null)
+            {
+                var jobPosition = await _jobPositionRepository.GetById(updateEmployeeRequest.JobPositionId.Value)
+                    ?? throw new InvalidOperationException("Nenhum cargo encontrado");
+
+                employee.JobPosition = jobPosition;
+            }
 
             employee.UpdatedAt = DateTime.Now;
 

@@ -8,5 +8,7 @@ namespace Domain.Models
         public int JobPositionId { get; set; }
         public required string Name { get; set; }
         public required decimal Salary { get; set; }
+
+        public virtual ICollection<Employee>? Employees { get; set; }
     }
 }
