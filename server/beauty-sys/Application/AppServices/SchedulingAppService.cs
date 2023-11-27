@@ -16,7 +16,7 @@ namespace Application.AppServices
 
         public async Task UpdateScheduling(int id, UpdateSchedulingRequest updateSchedulingRequest)
         {
-            if (updateSchedulingRequest.CustomerId == null && updateSchedulingRequest.ProcedureId == null && updateSchedulingRequest.EmployeeId == null)
+            if (updateSchedulingRequest.CustomerId == null && updateSchedulingRequest.ProcedureId == null && updateSchedulingRequest.EmployeeId == null && updateSchedulingRequest.SalonId == null)
                 throw new InvalidOperationException("Nenhuma modificação foi realizada!");
 
             await _schedulingService.UpdateScheduling(id, updateSchedulingRequest);

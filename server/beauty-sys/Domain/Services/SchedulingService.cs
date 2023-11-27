@@ -12,13 +12,15 @@ namespace Domain.Services
         private readonly ICustomerRepository _customerRepository;
         private readonly IEmployeeRepository _employeeRepository;
         private readonly IProcedureRepository _procedureRepository;
+        private readonly ISalonRepository _salonRepository;
 
-        public SchedulingService(ISchedulingRepository schedulingRepository, ICustomerRepository customerRepository, IEmployeeRepository employeeRepository, IProcedureRepository procedureRepository)
+        public SchedulingService(ISchedulingRepository schedulingRepository, ICustomerRepository customerRepository, IEmployeeRepository employeeRepository, IProcedureRepository procedureRepository, ISalonRepository salonRepository)
         {
             _schedulingRepository = schedulingRepository;
             _customerRepository = customerRepository;
             _employeeRepository = employeeRepository;
             _procedureRepository = procedureRepository;
+            _salonRepository = salonRepository;
         }
 
         public async Task SaveScheduling(CreateSchedulingRequest createSchedulingRequest)
@@ -35,6 +37,9 @@ namespace Domain.Services
             var procedure = await _procedureRepository.GetById(createSchedulingRequest.ProcedureId)
                 ?? throw new InvalidOperationException("Nenhum procedimento encontrado");
 
+            var salon = await _salonRepository.GetById(createSchedulingRequest.SalonId)
+                ?? throw new InvalidOperationException("Nenhum salão encontrado");
+
             var scheduling = new Scheduling
             {
                 StartDateTime = createSchedulingRequest.StartDateTime,
@@ -44,6 +49,7 @@ namespace Domain.Services
                 EmployeeId = employee.EmployeeId,
                 Procedure = procedure,
                 ProcedureId = procedure.ProcedureId,
+                Salon = salon,
                 InsertedAt = DateTime.Now
             };
 
@@ -115,6 +121,12 @@ namespace Domain.Services
             {
                 var procedure = await _procedureRepository.GetById(updateSchedulingRequest.ProcedureId.Value) ?? throw new InvalidOperationException("Nenhum procedimento encontrado");
                 scheduling.Procedure = procedure;
+            }
+
+            if (updateSchedulingRequest.SalonId.HasValue)
+            {
+                var salon = await _salonRepository.GetById(updateSchedulingRequest.SalonId.Value) ?? throw new InvalidOperationException("Nenhum salão encontrado");
+                scheduling.Salon = salon;
             }
 
             if (updateSchedulingRequest.StartDateTime.HasValue)

@@ -7,5 +7,6 @@ namespace Domain.Objects.Requests
         public int? CustomerId { get; set; }
         public int? EmployeeId { get; set; }
         public int? ProcedureId { get; set; }
+        public int? SalonId { get; set; }
     }
 }
