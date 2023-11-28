@@ -20,21 +20,26 @@ namespace Application.AutoMapper
 
             CreateProjection<Scheduling, GetSchedulingsToCalendarResponse>()
                 .ForMember(g => g.Day, opts => opts.MapFrom(s => s.StartDateTime.Day))
-                .ForMember(g => g.DailySchedules, opts => opts.MapFrom(s => s.Customer));
+                .ForMember(g => g.DailySchedule.CustomerBasicInfo, opts => opts.MapFrom(s => s.Customer)) 
+                .ForMember(g => g.DailySchedule.EmployeeBasicInfo, opts => opts.MapFrom(s => s.Employee))
+                .ForMember(g => g.DailySchedule.ProcedureBasicInfo, opts => opts.MapFrom(s => s.Procedure))
+                .ForMember(g => g.DailySchedule.SalonBasicInfo, opts => opts.MapFrom(s => s.Salon))
+                .ForMember(g => g.DailySchedule.PaymentBasicInfo, opts => opts.MapFrom(s => s.Payment));
 
-            CreateProjection<Customer, DailySchedule>()
-                .ForMember(g => g.CustomerName, opts => opts.MapFrom(c => c.Name));
+            CreateProjection<Customer, DailySchedule>();
 
             CreateMap<Scheduling, SchedulingDetailsIds>();
 
-            CreateProjection<Customer, CustomerBasicInfo>()
-                .ForMember(g => g.CustomerName, opts => opts.MapFrom(c => c.Name));
+            CreateProjection<Customer, CustomerBasicInfo>();
 
             CreateProjection<Employee, EmployeeBasicInfo>()
-                .ForMember(g => g.EmployeeName, opts => opts.MapFrom(e => e.Name));
+                .ForMember(g => g.JobPositionName, opts => opts.MapFrom(e => e.JobPosition.Name));
 
-            CreateProjection<Procedure, ProcedureBasicInfo>()
-                .ForMember(g => g.ProcedureName, opts => opts.MapFrom(p => p.Name));
+            CreateProjection<Procedure, ProcedureBasicInfo>();
+
+            CreateMap<Salon, SalonBasicInfo>();
+
+            CreateMap<Payment, PaymentBasicInfo>();
 
             CreateProjection<Procedure, ProcedureResponse>();
 
