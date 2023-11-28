@@ -8,6 +8,7 @@ using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Authentication;
 using System.Security.Claims;
+using System.Security.Cryptography;
 using System.Text;
 
 namespace Domain.Services
@@ -25,7 +26,7 @@ namespace Domain.Services
 
         public string LogIn(LogInRequest logInRequest)
         {
-            var userId = _userRepository.GetUserIdByNameAndPass(logInRequest.UserName, logInRequest.Password);
+            var userId = _userRepository.GetUserIdByNameAndPass(logInRequest.UserName, DecryptString(logInRequest.Password, "beauty-key"));
 
             if (!userId.HasValue)
                 throw new InvalidCredentialException("Usuário ou senha inválidos");
@@ -33,16 +34,11 @@ namespace Domain.Services
             return GenerateAuthToken(userId.Value.ToString());
         }
 
-        public async Task SaveUser(CreateUserRequest createCustomerRequest)
+        public async Task SaveUser(CreateUserRequest createUserRequest)
         {
-            var user = new User
-            {
-                Name = createCustomerRequest.Name,
-                Password = createCustomerRequest.Password,
-                InsertedAt = DateTime.Now
-            };
+            createUserRequest.Password = EncryptString(createUserRequest.Password, "beauty-key");
 
-            await _userRepository.SaveAsync(user);
+            await _userRepository.SaveAsync(_mapper.Map<User>(createUserRequest));
         }
 
         public async Task UpdateUser(int id, UpdateUserRequest updateUserRequest)
@@ -93,6 +89,56 @@ namespace Domain.Services
 
             var token = tokenHandler.CreateToken(tokenDescriptor);
             return tokenHandler.WriteToken(token);
+        }
+
+        public static string EncryptString(string text, string keyString)
+        {
+            var key = Encoding.UTF8.GetBytes(keyString);
+
+            using var aesAlg = Aes.Create();
+            using var encryptor = aesAlg.CreateEncryptor(key, aesAlg.IV);
+            using var msEncrypt = new MemoryStream();
+
+            using (var csEncrypt = new CryptoStream(msEncrypt, encryptor, CryptoStreamMode.Write))
+            using (var swEncrypt = new StreamWriter(csEncrypt))
+            {
+                swEncrypt.Write(text);
+            }
+
+            var iv = aesAlg.IV;
+            var decryptedContent = msEncrypt.ToArray();
+            var result = new byte[iv.Length + decryptedContent.Length];
+
+            Buffer.BlockCopy(iv, 0, result, 0, iv.Length);
+            Buffer.BlockCopy(decryptedContent, 0, result, iv.Length, decryptedContent.Length);
+
+            return Convert.ToBase64String(result);
+        }
+
+        public static string DecryptString(string cipherText, string keyString)
+        {
+            var fullCipher = Convert.FromBase64String(cipherText);
+
+            var iv = new byte[16];
+            var cipher = new byte[16];
+
+            Buffer.BlockCopy(fullCipher, 0, iv, 0, iv.Length);
+            Buffer.BlockCopy(fullCipher, iv.Length, cipher, 0, iv.Length);
+            var key = Encoding.UTF8.GetBytes(keyString);
+
+            using var aesAlg = Aes.Create();
+            using var decryptor = aesAlg.CreateDecryptor(key, iv);
+            string result;
+
+            using (var msDecrypt = new MemoryStream(cipher))
+            {
+                using var csDecrypt = new CryptoStream(msDecrypt, decryptor, CryptoStreamMode.Read);
+                using var srDecrypt = new StreamReader(csDecrypt);
+
+                result = srDecrypt.ReadToEnd();
+            }
+
+            return result;
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using Domain.Interfaces.Repositories;
+﻿using AutoMapper;
+using Domain.Interfaces.Repositories;
 using Domain.Interfaces.Services;
 using Domain.Models;
 using Domain.Objects.Reponses;
@@ -10,11 +11,13 @@ namespace Domain.Services
     {
         private readonly IEmployeeRepository _employeeRepository;
         private readonly IJobPositionRepository _jobPositionRepository;
+        private readonly IMapper _mapper;
 
-        public EmployeeService(IEmployeeRepository employeeRepository, IJobPositionRepository jobPositionRepository)
+        public EmployeeService(IEmployeeRepository employeeRepository, IJobPositionRepository jobPositionRepository, IMapper mapper)
         {
             _employeeRepository = employeeRepository;
             _jobPositionRepository = jobPositionRepository;
+            _mapper = mapper;
         }
 
         public async Task CreateEmployee(CreateEmployeeRequest createEmployeeRequest)
@@ -28,16 +31,7 @@ namespace Domain.Services
             var jobPosition = await _jobPositionRepository.GetById(createEmployeeRequest.JobPositionId)
                 ?? throw new InvalidOperationException("Nenhum cargo encontrado");
 
-            var employee = new Employee
-            {
-                Name = createEmployeeRequest.Name,
-                Office = createEmployeeRequest.Office,
-                Cpf = createEmployeeRequest.Cpf,
-                InsertedAt = DateTime.Now,
-                JobPosition = jobPosition
-            };
-
-            await _employeeRepository.SaveAsync(employee);
+            await _employeeRepository.SaveAsync(_mapper.Map<Employee>(createEmployeeRequest));
         }
 
         public ICollection<EmployeeResponse> GetEmployees(int? id, string? name, int currentPage, int takeQuantity)

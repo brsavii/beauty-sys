@@ -1,4 +1,5 @@
-﻿using Domain.Interfaces.Repositories;
+﻿using AutoMapper;
+using Domain.Interfaces.Repositories;
 using Domain.Interfaces.Services;
 using Domain.Models;
 using Domain.Objects.Requests;
@@ -8,23 +9,15 @@ namespace Domain.Services
     public class SalonService : ISalonService
     {
         private readonly ISalonRepository _salonRepository;
+        private readonly IMapper _mapper;
 
-        public SalonService(ISalonRepository salonRepository)
+        public SalonService(ISalonRepository salonRepository, IMapper mapper)
         {
             _salonRepository = salonRepository;
+            _mapper = mapper;
         }
 
-        public async Task SaveSalon(CreateSalonRequest createSalonRequest)
-        {
-            var salon = new Salon
-            {
-                Name = createSalonRequest.Name,
-                Location = createSalonRequest.Location,
-                InsertedAt = DateTime.Now
-            };
-
-            await _salonRepository.SaveAsync(salon);
-        }
+        public async Task SaveSalon(CreateSalonRequest createSalonRequest) => await _salonRepository.SaveAsync(_mapper.Map<Salon>(createSalonRequest));
 
         public async Task UpdateSalon(int id, UpdateSalonRequest updateSalonRequest)
         {

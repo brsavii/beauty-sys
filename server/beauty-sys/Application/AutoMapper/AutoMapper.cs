@@ -48,6 +48,24 @@ namespace Application.AutoMapper
             CreateMap<CreateJobPositionRequest, JobPosition>()
                  .ForMember(p => p.InsertedAt, opts => opts.MapFrom(c => DateTime.Now));
 
+            CreateMap<CreatePaymentRequest, Payment>()
+                 .ForMember(p => p.InsertedAt, opts => opts.MapFrom(c => DateTime.Now));
+
+            CreateMap<CreateCustomerRequest, Customer>()
+                 .ForMember(p => p.InsertedAt, opts => opts.MapFrom(c => DateTime.Now));
+
+            CreateMap<CreateEmployeeRequest, Employee>()
+                 .ForMember(p => p.InsertedAt, opts => opts.MapFrom(c => DateTime.Now));
+
+            CreateMap<CreateSalonRequest, Salon>()
+                 .ForMember(p => p.InsertedAt, opts => opts.MapFrom(c => DateTime.Now));
+
+            CreateMap<CreateSchedulingRequest, Scheduling>()
+                .ForMember(p => p.InsertedAt, opts => opts.MapFrom(c => DateTime.Now));
+
+            CreateMap<CreateUserRequest, User>()
+                .ForMember(p => p.InsertedAt, opts => opts.MapFrom(c => DateTime.Now));
+
             CreateMap<JobPosition, JobPositionResponse>();
 
             CreateMap<Customer, CustomerResponse>();

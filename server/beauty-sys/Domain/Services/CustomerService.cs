@@ -1,4 +1,5 @@
-﻿using Domain.Interfaces.Repositories;
+﻿using AutoMapper;
+using Domain.Interfaces.Repositories;
 using Domain.Interfaces.Services;
 using Domain.Models;
 using Domain.Objects.Reponses;
@@ -9,23 +10,15 @@ namespace Domain.Services
     public class CustomerService : ICustomerService
     {
         private readonly ICustomerRepository _customerRepository;
-        public CustomerService(ICustomerRepository customerRepository)
+        private readonly IMapper _mapper;
+
+        public CustomerService(ICustomerRepository customerRepository, IMapper mapper)
         {
             _customerRepository = customerRepository;
+            _mapper = mapper;
         }
 
-        public async Task CreateCustomer(CreateCustomerRequest createCustomerRequest)
-        {
-            var customer = new Customer
-            {
-                Name = createCustomerRequest.Name,
-                Phone = createCustomerRequest.Phone,
-                Description = createCustomerRequest.Description,
-                InsertedAt = DateTime.Now
-            };
-
-            await _customerRepository.SaveAsync(customer);
-        }
+        public async Task CreateCustomer(CreateCustomerRequest createCustomerRequest) => await _customerRepository.SaveAsync(_mapper.Map<Customer>(createCustomerRequest));
 
         public async Task DeleteCustomer(int id) => await _customerRepository.Delete(id);
 

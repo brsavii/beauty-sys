@@ -24,6 +24,7 @@ namespace Infra.CrossCutting
             services.AddScoped<ISchedulingService, SchedulingService>();
             services.AddScoped<IJobPositionService, JobPositionService>();
             services.AddScoped<ISalonService, SalonService>();
+            services.AddScoped<IPaymentService, PaymentService>();
 
             services.AddScoped<ICustomerRepository, CustomerRepository>();
             services.AddScoped<IEmployeeRepository, EmployeeRepository>();

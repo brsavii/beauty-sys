@@ -1,4 +1,5 @@
-﻿using Domain.Interfaces.Repositories;
+﻿using AutoMapper;
+using Domain.Interfaces.Repositories;
 using Domain.Interfaces.Services;
 using Domain.Models;
 using Domain.Objects.Requests;
@@ -14,8 +15,9 @@ namespace Domain.Services
         private readonly IProcedureRepository _procedureRepository;
         private readonly ISalonRepository _salonRepository;
         private readonly IPaymentRepository _paymentRepository;
+        private readonly IMapper _mapper;
 
-        public SchedulingService(ISchedulingRepository schedulingRepository, ICustomerRepository customerRepository, IEmployeeRepository employeeRepository, IProcedureRepository procedureRepository, ISalonRepository salonRepository, IPaymentRepository paymentRepository)
+        public SchedulingService(ISchedulingRepository schedulingRepository, ICustomerRepository customerRepository, IEmployeeRepository employeeRepository, IProcedureRepository procedureRepository, ISalonRepository salonRepository, IPaymentRepository paymentRepository, IMapper mapper)
         {
             _schedulingRepository = schedulingRepository;
             _customerRepository = customerRepository;
@@ -23,6 +25,7 @@ namespace Domain.Services
             _procedureRepository = procedureRepository;
             _salonRepository = salonRepository;
             _paymentRepository = paymentRepository;
+            _mapper = mapper;
         }
 
         public async Task SaveScheduling(CreateSchedulingRequest createSchedulingRequest)
@@ -59,7 +62,7 @@ namespace Domain.Services
                 InsertedAt = DateTime.Now
             };
 
-            await _schedulingRepository.SaveAsync(scheduling);
+            await _schedulingRepository.SaveAsync(_mapper.Map<Scheduling>(createSchedulingRequest));
         }
 
         public ICollection<GetSchedulingsToCalendarResponse> GetSchedulingsToCalendar(int month, int year, int? customerId, int? employeeId, int? procedureId, int? salonId)

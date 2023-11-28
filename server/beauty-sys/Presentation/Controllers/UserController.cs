@@ -17,7 +17,7 @@ namespace Presentation.Controllers
         }
 
         [HttpPost("SaveUser")]
-        public async Task<IActionResult> SaveUser(CreateUserRequest createCustomerRequest)
+        public async Task<IActionResult> SaveUser(CreateUserRequest createUserRequest)
         {
             try
             {

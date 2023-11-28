@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace Presentation.Controllers
 {
     [ApiController, Authorize]
-    [Route("JobPosition")]
+    [Route("Salon")]
     public class SalonController : ControllerBase
     {
         private readonly ISalonService _salonService;
@@ -48,21 +48,6 @@ namespace Presentation.Controllers
 
         [HttpDelete("DeleteSalon/{id}")]
         public async Task<IActionResult> DeleteSalon(int id)
-        {
-            try
-            {
-                await _salonService.DeleteSalon(id);
-
-                return Ok("Salão deletado com sucesso");
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(ex.Message);
-            }
-        }
-
-        [HttpDelete("DeleteCustomer/{id}")]
-        public async Task<IActionResult> DeleteCustomer(int id)
         {
             try
             {

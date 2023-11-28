@@ -66,7 +66,7 @@ namespace Presentation.Controllers
             {
                 await _jobPositionService.DeleteJobPosition(id);
 
-                return Ok("Cliente deletado com sucesso");
+                return Ok("Cargo deletado com sucesso");
             }
             catch (Exception ex)
             {
