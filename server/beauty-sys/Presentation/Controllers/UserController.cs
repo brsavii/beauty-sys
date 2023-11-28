@@ -21,7 +21,7 @@ namespace Presentation.Controllers
         {
             try
             {
-                await _userService.SaveUser(createCustomerRequest);
+                await _userService.SaveUser(createUserRequest);
 
                 return Ok("Usuário salvo com sucesso");
 

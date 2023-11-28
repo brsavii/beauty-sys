@@ -73,6 +73,24 @@ namespace Application.AutoMapper
             CreateMap<Employee, EmployeeResponse>();
 
             CreateMap<JobPosition, JobPositionResponse>();
+
+            CreateMap<Scheduling, GetSchedulingDetailResponse>()
+                .ForMember(p => p.Day, opts => opts.MapFrom(c => c.StartDateTime.Day))
+                .ForMember(p => p.Value, opts => opts.MapFrom(c => GetSchedulingValue(c.Procedure.Value, c.Payment.Discount)))
+                .ForMember(p => p.SalonName, opts => opts.MapFrom(c => c.Salon.Name))
+                .ForMember(p => p.CustomerBasicInfo, opts => opts.MapFrom(c => c.Customer))
+                .ForMember(p => p.EmployeeBasicInfo, opts => opts.MapFrom(c => c.Employee))
+                .ForMember(p => p.ProcedureBasicInfo, opts => opts.MapFrom(c => c.Procedure));
+        }
+
+        private static decimal GetSchedulingValue(decimal value, decimal? discount)
+        {
+            var schedulingValue = value - discount ?? 0;
+
+            if (schedulingValue < 0)
+                throw new InvalidOperationException("O valor do procedimento é negativo");
+
+            return schedulingValue;
         }
     }
 }

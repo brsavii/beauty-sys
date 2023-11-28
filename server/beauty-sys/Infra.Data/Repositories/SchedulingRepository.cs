@@ -39,14 +39,19 @@ namespace Infra.Data.Repositories
             return _mapper.ProjectTo<GetSchedulingsToCalendarResponse>(query);
         }
 
-        public SchedulingDetailsIds GetSchedulingDetailIds(int schedulingId)
+        public GetSchedulingDetailResponse GetSchedulingDetail(int schedulingId)
         {
-            return _mapper.Map<SchedulingDetailsIds>(_typedContext
+            var scheduling = _typedContext
                 .AsNoTracking()
                 .Include(s => s.Customer)
                 .Include(s => s.Employee)
                 .Include(s => s.Procedure)
-                .Where(s => s.SchedulingId == schedulingId));
+                .Include(s => s.Payment)
+                .Include(s => s.Salon)
+                .Where(s => s.SchedulingId == schedulingId)
+                ?? throw new InvalidOperationException("Nenhum agendamento encontrado");
+
+            return _mapper.Map<GetSchedulingDetailResponse>(scheduling);
         }
 
         public async Task<bool> HasAnyConflict(CreateSchedulingRequest createSchedulingRequest)

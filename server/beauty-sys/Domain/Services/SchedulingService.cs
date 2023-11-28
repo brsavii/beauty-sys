@@ -78,30 +78,8 @@ namespace Domain.Services
             return schedulings;
         }
 
-        public GetSchedulingDetailResponse GetSchedulingDetail(int schedulingId)
-        {
-            var schedulingDetailsIds = _schedulingRepository.GetSchedulingDetailIds(schedulingId)
+        public GetSchedulingDetailResponse GetSchedulingDetail(int schedulingId) => _schedulingRepository.GetSchedulingDetail(schedulingId)
                 ?? throw new InvalidOperationException("Nenhum agendamento encontrado");
-
-            var customerDetails = _customerRepository.GetCustomerBasicInfo().ToList()
-                ?? throw new InvalidOperationException("Nenhum cliente encontrado");
-
-            var employeeDetails = _employeeRepository.GetEmployeeBasicInfo().ToList()
-                ?? throw new InvalidOperationException("Nenhum funcionário encontrado");
-
-            var procedureDetails = _procedureRepository.GetProcedureBasicInfo().ToList()
-                 ?? throw new InvalidOperationException("Nenhum procedimento encontrado");
-
-            return new GetSchedulingDetailResponse
-            {
-                CurrentCustomerId = schedulingDetailsIds.CurrentCustomerId,
-                CurrentEmployeeId = schedulingDetailsIds.CurrentEmployeeId,
-                CurrentProcedureId = schedulingDetailsIds.CurrentProcedureId,
-                Customers = customerDetails,
-                Employees = employeeDetails,
-                Procedures = procedureDetails
-            };
-        }
 
         public async Task UpdateScheduling(int id, UpdateSchedulingRequest updateSchedulingRequest)
         {

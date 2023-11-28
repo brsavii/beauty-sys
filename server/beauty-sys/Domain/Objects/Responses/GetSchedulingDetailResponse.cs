@@ -2,12 +2,12 @@
 {
     public record GetSchedulingDetailResponse
     {
-        public int CurrentCustomerId { get; set; }
-        public int CurrentEmployeeId { get; set; }
-        public int CurrentProcedureId { get; set; }
-        public required ICollection<CustomerBasicInfo> Customers { get; set; }
-        public required ICollection<EmployeeBasicInfo> Employees { get; set; }
-        public required ICollection<ProcedureBasicInfo> Procedures { get; set; }
+        public int Day { get; set; }
+        public decimal Value { get; set; }
+        public required string SalonName { get; set; }
+        public required CustomerBasicInfo CustomerBasicInfo { get; set; }
+        public required EmployeeBasicInfo EmployeeBasicInfo { get; set; }
+        public required ProcedureBasicInfo ProcedureBasicInfo { get; set; }
     }
 
     public record SchedulingDetailsIds
