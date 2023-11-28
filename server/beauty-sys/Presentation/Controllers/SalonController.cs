@@ -16,12 +16,12 @@ namespace Presentation.Controllers
             _salonService = salonService;
         }
 
-        [HttpPatch("UpdateSalon/{Id}")]
-        public async Task<IActionResult> UpdateSalon(int id, UpdateSalonRequest updateSalonRequest)
+        [HttpPatch("UpdateSalon")]
+        public async Task<IActionResult> UpdateSalon(UpdateSalonRequest updateSalonRequest)
         {
             try
             {
-                await _salonService.UpdateSalon(id, updateSalonRequest);
+                await _salonService.UpdateSalon(updateSalonRequest);
 
                 return Ok("Salão atualizado com sucesso");
             }

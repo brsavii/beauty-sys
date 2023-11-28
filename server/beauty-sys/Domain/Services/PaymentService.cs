@@ -25,7 +25,7 @@ namespace Domain.Services
             await _paymentRepository.SaveAsync(_mapper.Map<Payment>(createPaymentRequest));
         }
 
-        public async Task UpdatePayment(int id, UpdatePaymentRequest updatePaymentRequest)
+        public async Task UpdatePayment(UpdatePaymentRequest updatePaymentRequest)
         {
             if (updatePaymentRequest.Name == null)
                 throw new InvalidOperationException("Nenhuma modificação foi realizada!");
@@ -33,7 +33,7 @@ namespace Domain.Services
             if (updatePaymentRequest.Discount.HasValue && updatePaymentRequest.Discount.Value <= 0)
                 throw new InvalidOperationException("O desconto não pode ser igual ou menor que zero");
 
-            var payment = await _paymentRepository.GetById(id) ?? throw new InvalidOperationException("Nenhum pagamento encontrado");
+            var payment = await _paymentRepository.GetById(updatePaymentRequest.PaymentId) ?? throw new InvalidOperationException("Nenhum pagamento encontrado");
 
             if (updatePaymentRequest.Name != null)
                 payment.Name = updatePaymentRequest.Name;

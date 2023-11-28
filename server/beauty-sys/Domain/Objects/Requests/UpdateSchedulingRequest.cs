@@ -3,6 +3,8 @@ namespace Domain.Objects.Requests
 {
     public record UpdateSchedulingRequest
     {
+        public int SchedulingId { get; set; }
+
         public DateTime? StartDateTime { get; set; }
         public int? CustomerId { get; set; }
         public int? EmployeeId { get; set; }

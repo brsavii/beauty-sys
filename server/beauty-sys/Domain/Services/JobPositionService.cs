@@ -36,7 +36,7 @@ namespace Domain.Services
             await _jobPositionRepository.SaveAsync(_mapper.Map<JobPosition>(createJobPositionRequest));
 
         }
-        public async Task UpdateJobPosition(int id, UpdateJobPositionRequest updateJobPositionRequest)
+        public async Task UpdateJobPosition(UpdateJobPositionRequest updateJobPositionRequest)
         {
             if (updateJobPositionRequest.Name == null && updateJobPositionRequest.Salary == null)
                 throw new InvalidOperationException("Nenhuma modificação foi realizada!");
@@ -44,7 +44,7 @@ namespace Domain.Services
             if (updateJobPositionRequest.Salary <= 0)
                 throw new InvalidOperationException("O salário não pode ser igual ou menor que zero");
 
-            var jobPosition = await _jobPositionRepository.GetById(id) ?? throw new InvalidOperationException("Nenhum cargo encontrado");
+            var jobPosition = await _jobPositionRepository.GetById(updateJobPositionRequest.JobPositionId) ?? throw new InvalidOperationException("Nenhum cargo encontrado");
 
             if (updateJobPositionRequest.Name != null)
                 jobPosition.Name = updateJobPositionRequest.Name;

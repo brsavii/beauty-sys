@@ -4,6 +4,6 @@ namespace Application.Interfaces
 {
     public interface IEmployeeAppService
     {
-        Task UpdateEmployee(int id, UpdateEmployeeRequest updateEmployeeRequest);
+        Task UpdateEmployee(UpdateEmployeeRequest updateEmployeeRequest);
     }
 }

@@ -29,12 +29,12 @@ namespace Presentation.Controllers
             }
         }
 
-        [HttpPatch("UpdateJobPosition/{Id}")]
-        public async Task<IActionResult> UpdateJobPosition(int id, UpdateJobPositionRequest updateJobPositionRequest)
+        [HttpPatch("UpdateJobPosition")]
+        public async Task<IActionResult> UpdateJobPosition(UpdateJobPositionRequest updateJobPositionRequest)
         {
             try
             {
-                await _jobPositionService.UpdateJobPosition(id, updateJobPositionRequest);
+                await _jobPositionService.UpdateJobPosition(updateJobPositionRequest);
 
                 return Ok("Cargo atualizado com sucesso");
             }

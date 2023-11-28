@@ -47,12 +47,12 @@ namespace Presentation.Controllers
             }
         }
 
-        [HttpPatch("UpdateCustomer/{Id}")]
-        public async Task<IActionResult> UpdateCustomer(int id, UpdateCustomerRequest updateCustomerRequest)
+        [HttpPatch("UpdateCustomer")]
+        public async Task<IActionResult> UpdateCustomer(UpdateCustomerRequest updateCustomerRequest)
         {
             try
             {
-                await _customerAppService.UpdateCustomer(id, updateCustomerRequest);
+                await _customerAppService.UpdateCustomer(updateCustomerRequest);
 
                 return Ok("Cliente atualizado com sucesso");
             }

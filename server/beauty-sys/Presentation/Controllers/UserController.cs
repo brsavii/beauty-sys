@@ -32,12 +32,12 @@ namespace Presentation.Controllers
             }
         }
 
-        [HttpPatch("UpdateUser/{Id}")]
-        public async Task<IActionResult> UpdateUser(int id, UpdateUserRequest updateUserRequest)
+        [HttpPatch("UpdateUser")]
+        public async Task<IActionResult> UpdateUser(UpdateUserRequest updateUserRequest)
         {
             try
             {
-                await _userService.UpdateUser(id, updateUserRequest);
+                await _userService.UpdateUser(updateUserRequest);
 
                 return Ok("Usuário atualizado com sucesso");
             }

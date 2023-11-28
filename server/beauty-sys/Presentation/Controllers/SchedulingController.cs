@@ -34,12 +34,12 @@ namespace Presentation.Controllers
             }
         }
 
-        [HttpPatch("UpdateScheduling/{Id}")]
-        public async Task<IActionResult> UpdateScheduling(int id, UpdateSchedulingRequest updateSchedulingRequest)
+        [HttpPatch("UpdateScheduling")]
+        public async Task<IActionResult> UpdateScheduling(UpdateSchedulingRequest updateSchedulingRequest)
         {
             try
             {
-                await _schedulingAppService.UpdateScheduling(id, updateSchedulingRequest);
+                await _schedulingAppService.UpdateScheduling(updateSchedulingRequest);
 
                 return Ok("Agendamento atualizado com sucesso");
             }

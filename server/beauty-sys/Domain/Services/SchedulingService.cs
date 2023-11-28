@@ -81,9 +81,9 @@ namespace Domain.Services
         public GetSchedulingDetailResponse GetSchedulingDetail(int schedulingId) => _schedulingRepository.GetSchedulingDetail(schedulingId)
                 ?? throw new InvalidOperationException("Nenhum agendamento encontrado");
 
-        public async Task UpdateScheduling(int id, UpdateSchedulingRequest updateSchedulingRequest)
+        public async Task UpdateScheduling(UpdateSchedulingRequest updateSchedulingRequest)
         {
-            var scheduling = await _schedulingRepository.GetById(id) ?? throw new InvalidOperationException("Nenhum agendamento encontrado");
+            var scheduling = await _schedulingRepository.GetById(updateSchedulingRequest.SchedulingId) ?? throw new InvalidOperationException("Nenhum agendamento encontrado");
 
             var startDateTimeToCheck = updateSchedulingRequest.StartDateTime ?? scheduling.StartDateTime;
             var customerIdToCheck = updateSchedulingRequest.CustomerId ?? scheduling.CustomerId;

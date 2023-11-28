@@ -8,6 +8,6 @@ namespace Domain.Interfaces.Services
         Task DeleteProcedure(int id);
         ICollection<ProcedureResponse> GetProcedures(int? id, string? name, int currentPage, int takeQuantity);
         Task SaveProcedure(CreateProcedureRequest createProcedureRequest);
-        Task UpdateProcedure(int id, UpdateProcedureRequest updateProcedureRequest);
+        Task UpdateProcedure(UpdateProcedureRequest updateProcedureRequest);
     }
 }

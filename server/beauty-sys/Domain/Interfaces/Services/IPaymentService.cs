@@ -5,7 +5,7 @@ namespace Domain.Interfaces.Services
     public interface IPaymentService
     {
         Task DeletePayment(int id);
-        Task UpdatePayment(int id, UpdatePaymentRequest updatePaymentRequest);
+        Task UpdatePayment(UpdatePaymentRequest updatePaymentRequest);
         Task SavePayment(CreatePaymentRequest createPaymentRequest);
     }
 }

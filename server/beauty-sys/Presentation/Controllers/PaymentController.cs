@@ -16,12 +16,12 @@ namespace Presentation.Controllers
             _paymentService = paymentService;
         }
 
-        [HttpPatch("UpdatePayment/{Id}")]
-        public async Task<IActionResult> UpdatePayment(int id, UpdatePaymentRequest updatePaymentRequest)
+        [HttpPatch("UpdatePayment")]
+        public async Task<IActionResult> UpdatePayment(UpdatePaymentRequest updatePaymentRequest)
         {
             try
             {
-                await _paymentService.UpdatePayment(id, updatePaymentRequest);
+                await _paymentService.UpdatePayment(updatePaymentRequest);
 
                 return Ok("Pagamento atualizado com sucesso");
             }

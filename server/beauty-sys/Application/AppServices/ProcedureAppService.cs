@@ -14,12 +14,12 @@ namespace Application.AppServices
             _procedureService = procedureService;
         }
 
-        public async Task UpdateProcedure(int id, UpdateProcedureRequest updateProcedureRequest)
+        public async Task UpdateProcedure(UpdateProcedureRequest updateProcedureRequest)
         {
             if (updateProcedureRequest.Name == null && updateProcedureRequest.Value == null)
                 throw new InvalidOperationException("Nenhuma modificação foi realizada!");
 
-            await _procedureService.UpdateProcedure(id, updateProcedureRequest);
+            await _procedureService.UpdateProcedure(updateProcedureRequest);
         }
     }
 }

@@ -41,12 +41,12 @@ namespace Domain.Services
             await _userRepository.SaveAsync(_mapper.Map<User>(createUserRequest));
         }
 
-        public async Task UpdateUser(int id, UpdateUserRequest updateUserRequest)
+        public async Task UpdateUser(UpdateUserRequest updateUserRequest)
         {
             if (updateUserRequest.Name == null && updateUserRequest.Password == null)
                 throw new InvalidOperationException("Nenhuma modificação foi realizada!");
 
-            var user = await _userRepository.GetById(id) ?? throw new InvalidOperationException("Nenhum usuário encontrado");
+            var user = await _userRepository.GetById(updateUserRequest.UserId) ?? throw new InvalidOperationException("Nenhum usuário encontrado");
 
             if (updateUserRequest.Name != null)
                 user.Name = updateUserRequest.Name;

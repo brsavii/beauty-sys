@@ -32,9 +32,9 @@ namespace Domain.Services
             return customers;
         }
 
-        public async Task UpdateCustomer(int id, UpdateCustomerRequest updateCustomerRequest)
+        public async Task UpdateCustomer(UpdateCustomerRequest updateCustomerRequest)
         {
-            var customer = await _customerRepository.GetById(id) ?? throw new InvalidOperationException("Nenhum cliente encontrado");
+            var customer = await _customerRepository.GetById(updateCustomerRequest.CustomerId) ?? throw new InvalidOperationException("Nenhum cliente encontrado");
 
             if (updateCustomerRequest.Name != null)
                 customer.Name = updateCustomerRequest.Name;

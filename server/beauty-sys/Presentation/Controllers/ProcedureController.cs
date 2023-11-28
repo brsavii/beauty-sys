@@ -48,12 +48,12 @@ namespace Presentation.Controllers
             }
         }
 
-        [HttpPatch("UpdateProcedure/{Id}")]
-        public async Task<IActionResult> UpdateProcedure(int id, UpdateProcedureRequest updateProcedureRequest)
+        [HttpPatch("UpdateProcedure")]
+        public async Task<IActionResult> UpdateProcedure(UpdateProcedureRequest updateProcedureRequest)
         {
             try
             {
-                await _procedureAppService.UpdateProcedure(id, updateProcedureRequest);
+                await _procedureAppService.UpdateProcedure(updateProcedureRequest);
 
                 return Ok("Procedimento atualizado com sucesso");
             }

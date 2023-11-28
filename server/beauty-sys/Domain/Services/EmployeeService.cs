@@ -44,9 +44,9 @@ namespace Domain.Services
             return employees;
         }
 
-        public async Task UpdateEmployee(int id, UpdateEmployeeRequest updateEmployeeRequest)
+        public async Task UpdateEmployee(UpdateEmployeeRequest updateEmployeeRequest)
         {
-            var employee = await _employeeRepository.GetById(id) ?? throw new InvalidOperationException("Nenhum cliente encontrado.");
+            var employee = await _employeeRepository.GetById(updateEmployeeRequest.EmployeeId) ?? throw new InvalidOperationException("Nenhum cliente encontrado.");
 
             if (updateEmployeeRequest.Name != null)
                 employee.Name = updateEmployeeRequest.Name;

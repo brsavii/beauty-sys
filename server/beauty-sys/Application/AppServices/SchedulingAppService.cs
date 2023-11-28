@@ -14,12 +14,12 @@ namespace Application.AppServices
             _schedulingService = schedulingService;
         }
 
-        public async Task UpdateScheduling(int id, UpdateSchedulingRequest updateSchedulingRequest)
+        public async Task UpdateScheduling(UpdateSchedulingRequest updateSchedulingRequest)
         {
             if (updateSchedulingRequest.CustomerId == null && updateSchedulingRequest.ProcedureId == null && updateSchedulingRequest.EmployeeId == null && updateSchedulingRequest.SalonId == null && updateSchedulingRequest.PaymentId == null)
                 throw new InvalidOperationException("Nenhuma modificação foi realizada!");
 
-            await _schedulingService.UpdateScheduling(id, updateSchedulingRequest);
+            await _schedulingService.UpdateScheduling(updateSchedulingRequest);
         }
     }
 }

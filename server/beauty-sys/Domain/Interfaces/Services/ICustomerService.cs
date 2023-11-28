@@ -7,7 +7,7 @@ namespace Domain.Interfaces.Services
     {
         ICollection<CustomerResponse> GetCustomers(int currentPage, int takeQuantity, int? id, string? name);
         Task DeleteCustomer(int id);
-        Task UpdateCustomer(int id, UpdateCustomerRequest updateCustomerRequest);
+        Task UpdateCustomer(UpdateCustomerRequest updateCustomerRequest);
         Task CreateCustomer(CreateCustomerRequest createCustomerRequest);
     }
 }

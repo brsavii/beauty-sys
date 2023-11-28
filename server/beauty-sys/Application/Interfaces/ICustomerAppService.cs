@@ -5,6 +5,6 @@ namespace Application.Interfaces
     public interface ICustomerAppService
     {
         Task CreateCustomer(CreateCustomerRequest createCustomerRequest);
-        Task UpdateCustomer(int id, UpdateCustomerRequest updateCustomerRequest);
+        Task UpdateCustomer(UpdateCustomerRequest updateCustomerRequest);
     }
 }

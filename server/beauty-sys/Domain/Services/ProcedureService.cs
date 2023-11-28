@@ -32,9 +32,9 @@ namespace Domain.Services
 
         public async Task SaveProcedure(CreateProcedureRequest createProcedureRequest) => await _procedureRepository.SaveAsync(_mapper.Map<Procedure>(createProcedureRequest));
 
-        public async Task UpdateProcedure(int id, UpdateProcedureRequest updateProcedureRequest)
+        public async Task UpdateProcedure(UpdateProcedureRequest updateProcedureRequest)
         {
-            var procedure = await _procedureRepository.GetById(id) ?? throw new InvalidOperationException("Nenhum procedimento encontrado");
+            var procedure = await _procedureRepository.GetById(updateProcedureRequest.ProcedureId) ?? throw new InvalidOperationException("Nenhum procedimento encontrado");
 
             if (updateProcedureRequest.Name != null)
                 procedure.Name = updateProcedureRequest.Name;

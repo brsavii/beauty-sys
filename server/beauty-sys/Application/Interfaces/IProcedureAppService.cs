@@ -4,6 +4,6 @@ namespace Application.Interfaces
 {
     public interface IProcedureAppService
     {
-        Task UpdateProcedure(int id, UpdateProcedureRequest updateProcedureRequest);
+        Task UpdateProcedure(UpdateProcedureRequest updateProcedureRequest);
     }
 }

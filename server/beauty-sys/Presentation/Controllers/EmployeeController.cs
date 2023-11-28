@@ -48,12 +48,12 @@ namespace Presentation.Controllers
             }
         }
 
-        [HttpPatch("UpdateEmployee/{Id}")]
-        public async Task<IActionResult> UpdateEmployee(int id, UpdateEmployeeRequest updateEmployeeRequest)
+        [HttpPatch("UpdateEmployee")]
+        public async Task<IActionResult> UpdateEmployee(UpdateEmployeeRequest updateEmployeeRequest)
         {
             try
             {
-                await _employeeAppService.UpdateEmployee(id, updateEmployeeRequest);
+                await _employeeAppService.UpdateEmployee(updateEmployeeRequest);
 
                 return Ok("Funcionário atualizado com sucesso");
             }

@@ -11,12 +11,12 @@ namespace Application.AppServices
         {
             _employeeService = employeeService;
         }
-        public async Task UpdateEmployee(int id, UpdateEmployeeRequest updateEmployeeRequest)
+        public async Task UpdateEmployee(UpdateEmployeeRequest updateEmployeeRequest)
         {
             if (updateEmployeeRequest.Name == null && updateEmployeeRequest.Office == null && updateEmployeeRequest.JobPositionId == null)
                 throw new InvalidOperationException("Nenhuma modificação foi realizada!");
 
-            await _employeeService.UpdateEmployee(id, updateEmployeeRequest);
+            await _employeeService.UpdateEmployee(updateEmployeeRequest);
         }
     }
 }

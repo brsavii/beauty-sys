@@ -19,12 +19,12 @@ namespace Domain.Services
 
         public async Task SaveSalon(CreateSalonRequest createSalonRequest) => await _salonRepository.SaveAsync(_mapper.Map<Salon>(createSalonRequest));
 
-        public async Task UpdateSalon(int id, UpdateSalonRequest updateSalonRequest)
+        public async Task UpdateSalon(UpdateSalonRequest updateSalonRequest)
         {
             if (updateSalonRequest.Name == null && updateSalonRequest.Location == null)
                 throw new InvalidOperationException("Nenhuma modificação foi realizada!");
 
-            var salon = await _salonRepository.GetById(id) ?? throw new InvalidOperationException("Nenhum salão encontrado");
+            var salon = await _salonRepository.GetById(updateSalonRequest.SalonId) ?? throw new InvalidOperationException("Nenhum salão encontrado");
 
             if (updateSalonRequest.Name != null)
                 salon.Name = updateSalonRequest.Name;
