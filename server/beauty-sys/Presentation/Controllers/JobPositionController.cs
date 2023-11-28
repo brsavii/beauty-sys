@@ -58,5 +58,20 @@ namespace Presentation.Controllers
                 return BadRequest(ex.Message);
             }
         }
+
+        [HttpDelete("DeleteJobPosition")]
+        public async Task<IActionResult> DeleteJobPosition(int id)
+        {
+            try
+            {
+                await _jobPositionService.DeleteJobPosition(id);
+
+                return Ok("Cliente deletado com sucesso");
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
     }
 }

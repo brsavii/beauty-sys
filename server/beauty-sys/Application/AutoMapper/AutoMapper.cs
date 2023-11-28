@@ -20,7 +20,7 @@ namespace Application.AutoMapper
 
             CreateProjection<Scheduling, GetSchedulingsToCalendarResponse>()
                 .ForMember(g => g.Day, opts => opts.MapFrom(s => s.StartDateTime.Day))
-                .ForMember(g => g.DailySchedule.CustomerBasicInfo, opts => opts.MapFrom(s => s.Customer)) 
+                .ForMember(g => g.DailySchedule.CustomerBasicInfo, opts => opts.MapFrom(s => s.Customer))
                 .ForMember(g => g.DailySchedule.EmployeeBasicInfo, opts => opts.MapFrom(s => s.Employee))
                 .ForMember(g => g.DailySchedule.ProcedureBasicInfo, opts => opts.MapFrom(s => s.Procedure))
                 .ForMember(g => g.DailySchedule.SalonBasicInfo, opts => opts.MapFrom(s => s.Salon))

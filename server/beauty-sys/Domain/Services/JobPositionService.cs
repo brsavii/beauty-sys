@@ -56,5 +56,7 @@ namespace Domain.Services
 
             await _jobPositionRepository.UpdateAsync(jobPosition);
         }
+
+        public async Task DeleteJobPosition(int id) => await _jobPositionRepository.Delete(id);
     }
 }
