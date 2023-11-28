@@ -31,7 +31,6 @@ The following technologies are used in the development of this system:
 - .NET (C#)
 - Angular
 - SQL Server
-- MongoDB
 
 ## Features
 
