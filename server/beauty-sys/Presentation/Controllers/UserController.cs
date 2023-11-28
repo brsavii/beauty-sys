@@ -32,7 +32,7 @@ namespace Presentation.Controllers
             }
         }
 
-        [HttpPatch("UpdateUser")]
+        [HttpPatch("UpdateUser/{Id}")]
         public async Task<IActionResult> UpdateUser(int id, UpdateUserRequest updateUserRequest)
         {
             try
@@ -60,7 +60,7 @@ namespace Presentation.Controllers
             }
         }
 
-        [HttpDelete("DeleteUser")]
+        [HttpDelete("DeleteUser/{Id}")]
         public async Task<IActionResult> DeleteUser(int id)
         {
             try

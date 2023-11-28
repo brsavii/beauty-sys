@@ -48,7 +48,7 @@ namespace Presentation.Controllers
             }
         }
 
-        [HttpPatch("UpdateProcedure")]
+        [HttpPatch("UpdateProcedure/{Id}")]
         public async Task<IActionResult> UpdateProcedure(int id, UpdateProcedureRequest updateProcedureRequest)
         {
             try
@@ -63,7 +63,7 @@ namespace Presentation.Controllers
             }
         }
 
-        [HttpDelete("DeleteProcedure")]
+        [HttpDelete("DeleteProcedure/{Id}")]
         public async Task<IActionResult> DeleteProcedure(int id)
         {
             try

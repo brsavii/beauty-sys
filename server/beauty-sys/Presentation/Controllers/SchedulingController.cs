@@ -34,7 +34,7 @@ namespace Presentation.Controllers
             }
         }
 
-        [HttpPatch("UpdateScheduling")]
+        [HttpPatch("UpdateScheduling/{Id}")]
         public async Task<IActionResult> UpdateScheduling(int id, UpdateSchedulingRequest updateSchedulingRequest)
         {
             try
@@ -49,7 +49,7 @@ namespace Presentation.Controllers
             }
         }
 
-        [HttpDelete("DeleteScheduling")]
+        [HttpDelete("DeleteScheduling/{Id}")]
         public async Task<IActionResult> DeleteScheduling(int id)
         {
             try
@@ -77,7 +77,7 @@ namespace Presentation.Controllers
             }
         }
 
-        [HttpGet("GetSchedulingDetail")]
+        [HttpGet("GetSchedulingDetail/{schedulingId}")]
         public IActionResult GetSchedulingDetail(int schedulingId)
         {
             try

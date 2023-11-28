@@ -48,7 +48,7 @@ namespace Presentation.Controllers
             }
         }
 
-        [HttpPatch("UpdateEmployee")]
+        [HttpPatch("UpdateEmployee/{Id}")]
         public async Task<IActionResult> UpdateEmployee(int id, UpdateEmployeeRequest updateEmployeeRequest)
         {
             try

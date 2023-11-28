@@ -16,7 +16,7 @@ namespace Presentation.Controllers
             _salonService = salonService;
         }
 
-        [HttpPatch("UpdateSalon")]
+        [HttpPatch("UpdateSalon/{Id}")]
         public async Task<IActionResult> UpdateSalon(int id, UpdateSalonRequest updateSalonRequest)
         {
             try

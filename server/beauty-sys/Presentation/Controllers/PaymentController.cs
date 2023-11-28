@@ -16,7 +16,7 @@ namespace Presentation.Controllers
             _paymentService = paymentService;
         }
 
-        [HttpPatch("UpdatePayment")]
+        [HttpPatch("UpdatePayment/{Id}")]
         public async Task<IActionResult> UpdatePayment(int id, UpdatePaymentRequest updatePaymentRequest)
         {
             try

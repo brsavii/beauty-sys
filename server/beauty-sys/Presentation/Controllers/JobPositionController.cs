@@ -29,7 +29,7 @@ namespace Presentation.Controllers
             }
         }
 
-        [HttpPatch("UpdateJobPosition")]
+        [HttpPatch("UpdateJobPosition/{Id}")]
         public async Task<IActionResult> UpdateJobPosition(int id, UpdateJobPositionRequest updateJobPositionRequest)
         {
             try
@@ -59,7 +59,7 @@ namespace Presentation.Controllers
             }
         }
 
-        [HttpDelete("DeleteJobPosition")]
+        [HttpDelete("DeleteJobPosition/{Id}")]
         public async Task<IActionResult> DeleteJobPosition(int id)
         {
             try
