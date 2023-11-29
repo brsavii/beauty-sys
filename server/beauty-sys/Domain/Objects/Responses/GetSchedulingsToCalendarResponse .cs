@@ -4,7 +4,7 @@
     {
         public int Day { get; set; }
         public int? SchedulingId { get; set; }
-        public ICollection<SchedulingDetail>? SchedulingDetails { get; set; }   
+        public ICollection<SchedulingDetail>? SchedulingDetails { get; set; }
     }
 
     public record SchedulingDetail
