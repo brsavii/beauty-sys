@@ -16,10 +16,6 @@ namespace Infra.Data.Mappings
                 .IsRequired()
                 .HasMaxLength(70);
 
-            builder.Property(c => c.Office)
-                .IsRequired()
-                .HasMaxLength(50);
-
             builder.Property(c => c.Cpf)
                 .IsRequired()
                 .HasMaxLength(11)

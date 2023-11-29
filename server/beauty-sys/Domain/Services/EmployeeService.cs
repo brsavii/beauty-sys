@@ -54,9 +54,6 @@ namespace Domain.Services
             if (updateEmployeeRequest.Name != null)
                 employee.Name = updateEmployeeRequest.Name;
 
-            if (updateEmployeeRequest.Office != null)
-                employee.Office = updateEmployeeRequest.Office;
-
             if (updateEmployeeRequest.JobPositionId != null)
             {
                 var jobPosition = await _jobPositionRepository.GetById(updateEmployeeRequest.JobPositionId.Value)
