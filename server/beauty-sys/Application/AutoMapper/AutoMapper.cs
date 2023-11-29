@@ -18,13 +18,16 @@ namespace Application.AutoMapper
             CreateMap<CreateProcedureRequest, Procedure>()
                 .ForMember(p => p.InsertedAt, opts => opts.MapFrom(c => DateTime.Now));
 
-            CreateMap<Scheduling, GetSchedulingsToCalendarResponse>()
+            CreateMap<Scheduling, GetFullSchedulings>()
                 .ForMember(g => g.Day, opts => opts.MapFrom(s => s.StartDateTime.Day))
+                .ForMember(g => g.TotalValue, opts => opts.MapFrom(s => GetSchedulingValue(s.Procedure.Value, s.Payment.Discount)))
                 .ForMember(g => g.CustomerBasicInfo, opts => opts.MapFrom(s => s.Customer))
                 .ForMember(g => g.EmployeeBasicInfo, opts => opts.MapFrom(s => s.Employee))
                 .ForMember(g => g.ProcedureBasicInfo, opts => opts.MapFrom(s => s.Procedure))
                 .ForMember(g => g.SalonBasicInfo, opts => opts.MapFrom(s => s.Salon))
                 .ForMember(g => g.PaymentBasicInfo, opts => opts.MapFrom(s => s.Payment));
+
+            CreateMap<GetFullSchedulings, SchedulingDetail>();
 
             CreateMap<Scheduling, SchedulingDetailsIds>();
 

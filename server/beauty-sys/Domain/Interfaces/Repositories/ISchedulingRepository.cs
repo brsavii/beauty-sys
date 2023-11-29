@@ -7,7 +7,7 @@ namespace Domain.Interfaces.Repositories
     public interface ISchedulingRepository : IBaseRepository<Scheduling>
     {
         GetSchedulingDetailResponse GetSchedulingDetail(int schedulingId);
-        IQueryable<GetSchedulingsToCalendarResponse> GetSchedulingsToCalendar(int month, int year, int? customerId, int? employeeId, int? procedureId, int? salonId);
+        ICollection<GetSchedulingsToCalendarResponse> GetSchedulingsToCalendar(int month, int year, int? customerId, int? employeeId, int? procedureId, int? salonId);
         Task<bool> HasAnyConflict(CreateSchedulingRequest createSchedulingRequest);
         Task<bool> HasAnyConflict(DateTime startDateTime, int schedulingId, int customerId, int employeeId);
     }

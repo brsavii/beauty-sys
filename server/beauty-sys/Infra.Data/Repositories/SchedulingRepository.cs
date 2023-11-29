@@ -17,7 +17,7 @@ namespace Infra.Data.Repositories
             _mapper = mapper;
         }
 
-        public IQueryable<GetSchedulingsToCalendarResponse> GetSchedulingsToCalendar(int month, int year, int? customerId, int? employeeId, int? procedureId, int? salonId)
+        public ICollection<GetSchedulingsToCalendarResponse> GetSchedulingsToCalendar(int month, int year, int? customerId, int? employeeId, int? procedureId, int? salonId)
         {
             var query = _typedContext
                 .AsNoTracking()
@@ -36,7 +36,43 @@ namespace Infra.Data.Repositories
             if (salonId.HasValue)
                 query = query.Where(s => s.SalonId == salonId.Value);
 
-            return _mapper.ProjectTo<GetSchedulingsToCalendarResponse>(query);
+            var schedulings = _mapper.ProjectTo<GetFullSchedulings>(query).ToList();
+
+            var response = new List<GetSchedulingsToCalendarResponse>();
+
+            foreach (var scheduling in schedulings)
+            {
+                if (response.Any(r => r.Day == scheduling.Day))
+                    continue;
+
+                var schedulingsInSameDay = schedulings.Where(s => s.Day == scheduling.Day);
+
+                if (schedulingsInSameDay.Count() > 1)
+                {
+                    var details = new List<SchedulingDetail>();
+
+                    foreach (var item in schedulingsInSameDay)
+                    {
+                        details.Add(_mapper.Map<SchedulingDetail>(item));
+                    }
+
+                    response.Add(new GetSchedulingsToCalendarResponse
+                    {
+                        Day = scheduling.Day,
+                        SchedulingId = scheduling.SchedulingId,
+                        SchedulingDetails = details
+                    });
+                }
+                else
+                    response.Add(new GetSchedulingsToCalendarResponse
+                    {
+                        Day = scheduling.Day,
+                        SchedulingId = scheduling.SchedulingId,
+                        SchedulingDetails = _mapper.ProjectTo<SchedulingDetail>(schedulings.AsQueryable()).ToList()
+                    });
+            }
+
+            return response;
         }
 
         public GetSchedulingDetailResponse GetSchedulingDetail(int schedulingId)
