@@ -84,10 +84,12 @@ namespace Infra.Data.Repositories
                 .Include(s => s.Procedure)
                 .Include(s => s.Payment)
                 .Include(s => s.Salon)
-                .Where(s => s.SchedulingId == schedulingId)
-                ?? throw new InvalidOperationException("Nenhum agendamento encontrado");
+                .FirstOrDefault(s => s.SchedulingId == schedulingId)
+                    ?? throw new InvalidOperationException("Nenhum agendamento encontrado");
 
-            return _mapper.Map<GetSchedulingDetailResponse>(scheduling);
+            var response = _mapper.Map<GetSchedulingDetailResponse>(scheduling);
+
+            return response;
         }
 
         public async Task<bool> HasAnyConflict(CreateSchedulingRequest createSchedulingRequest)

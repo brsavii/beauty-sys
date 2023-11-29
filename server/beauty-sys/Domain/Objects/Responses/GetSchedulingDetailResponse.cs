@@ -3,6 +3,7 @@
     public record GetSchedulingDetailResponse
     {
         public int Day { get; set; }
+        public DateTime StartDateTime { get; set; }
         public decimal Value { get; set; }
         public required string SalonName { get; set; }
         public required CustomerBasicInfo CustomerBasicInfo { get; set; }
