@@ -34,7 +34,13 @@ namespace Domain.Services
             return GenerateAuthToken(userId.Value.ToString());
         }
 
-        public async Task SaveUser(CreateUserRequest createUserRequest) => await _userRepository.SaveAsync(_mapper.Map<User>(createUserRequest));
+        public async Task SaveUser(CreateUserRequest createUserRequest)
+        {
+            if (await _userRepository.HasUserWithSameName(createUserRequest.Name))
+                throw new InvalidOperationException("Já existe um usuário com esse nome");
+
+            await _userRepository.SaveAsync(_mapper.Map<User>(createUserRequest));
+        }
 
         public async Task UpdateUser(UpdateUserRequest updateUserRequest)
         {
@@ -44,7 +50,12 @@ namespace Domain.Services
             var user = await _userRepository.GetById(updateUserRequest.UserId) ?? throw new InvalidOperationException("Nenhum usuário encontrado");
 
             if (updateUserRequest.Name != null)
+            {
+                if (await _userRepository.HasUserWithSameName(updateUserRequest.Name))
+                    throw new InvalidOperationException("Já existe um usuário com esse nome");
+
                 user.Name = updateUserRequest.Name;
+            }
 
             if (updateUserRequest.Password != null)
                 user.Password = updateUserRequest.Password;

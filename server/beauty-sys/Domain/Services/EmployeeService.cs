@@ -31,7 +31,10 @@ namespace Domain.Services
             var jobPosition = await _jobPositionRepository.GetById(createEmployeeRequest.JobPositionId)
                 ?? throw new InvalidOperationException("Nenhum cargo encontrado");
 
-            await _employeeRepository.SaveAsync(_mapper.Map<Employee>(createEmployeeRequest));
+            var employee = _mapper.Map<Employee>(createEmployeeRequest);
+            employee.JobPosition = jobPosition;
+
+            await _employeeRepository.SaveAsync(employee);
         }
 
         public ICollection<EmployeeResponse> GetEmployees(int? id, string? name, int currentPage, int takeQuantity)

@@ -32,6 +32,6 @@ namespace Application.AppServices
             await _customerService.UpdateCustomer(updateCustomerRequest);
         }
 
-        private static bool IsValidPhoneNumber(string phoneNumber) => phoneNumber.Length != 11;
+        private static bool IsValidPhoneNumber(string phoneNumber) => phoneNumber.Length == 11;
     }
 }

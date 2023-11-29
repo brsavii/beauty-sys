@@ -63,7 +63,7 @@ namespace Presentation.Controllers
             }
         }
 
-        [HttpDelete("DeleteProcedure/{Id}")]
+        [HttpDelete("DeleteProcedure/{id}")]
         public async Task<IActionResult> DeleteProcedure(int id)
         {
             try

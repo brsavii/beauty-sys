@@ -48,7 +48,7 @@ namespace Presentation.Controllers
         }
 
         [HttpGet("GetUsers")]
-        public IActionResult GetUsers(int? id, string? name, int takeQuantity = 1, int currentPage = 10)
+        public IActionResult GetUsers(int? id, string? name, int takeQuantity = 10, int currentPage = 1)
         {
             try
             {
@@ -60,7 +60,7 @@ namespace Presentation.Controllers
             }
         }
 
-        [HttpDelete("DeleteUser/{Id}")]
+        [HttpDelete("DeleteUser/{id}")]
         public async Task<IActionResult> DeleteUser(int id)
         {
             try

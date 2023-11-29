@@ -59,7 +59,7 @@ namespace Presentation.Controllers
             }
         }
 
-        [HttpDelete("DeleteJobPosition/{Id}")]
+        [HttpDelete("DeleteJobPosition/{id}")]
         public async Task<IActionResult> DeleteJobPosition(int id)
         {
             try

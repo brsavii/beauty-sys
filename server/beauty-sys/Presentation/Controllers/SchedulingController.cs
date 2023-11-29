@@ -49,7 +49,7 @@ namespace Presentation.Controllers
             }
         }
 
-        [HttpDelete("DeleteScheduling/{Id}")]
+        [HttpDelete("DeleteScheduling/{id}")]
         public async Task<IActionResult> DeleteScheduling(int id)
         {
             try

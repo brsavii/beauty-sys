@@ -7,5 +7,6 @@ namespace Domain.Interfaces.Repositories
     {
         int? GetUserIdByNameAndPass(string name, string passowd);
         ICollection<UserResponse> GetUsers(int? id, string? name, int currentPage, int takeQuantity);
+        Task<bool> HasUserWithSameName(string name);
     }
 }

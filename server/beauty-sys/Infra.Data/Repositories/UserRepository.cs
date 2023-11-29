@@ -3,6 +3,7 @@ using Domain.Interfaces.Repositories;
 using Domain.Models;
 using Domain.Objects.Reponses;
 using Infra.Data.Context;
+using Microsoft.EntityFrameworkCore;
 
 namespace Infra.Data.Repositories
 {
@@ -29,5 +30,7 @@ namespace Infra.Data.Repositories
 
             return _mapper.ProjectTo<UserResponse>(query).ToList();
         }
+
+        public async Task<bool> HasUserWithSameName(string name) => await _typedContext.AnyAsync(u => u.Name == name);
     }
 }

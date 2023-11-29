@@ -32,7 +32,7 @@ namespace Presentation.Controllers
             }
         }
 
-        [HttpDelete("DeleteCustomer/{Id}")]
+        [HttpDelete("DeleteCustomer/{id}")]
         public async Task<IActionResult> DeleteCustomer(int id)
         {
             try
