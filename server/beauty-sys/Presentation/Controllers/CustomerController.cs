@@ -19,7 +19,7 @@ namespace Presentation.Controllers
             _customerAppService = customerAppService;
         }
 
-        [HttpGet("GetCustomers/{Id}")]
+        [HttpGet("GetCustomers")]
         public IActionResult GetCustomers(int? id, string? name, int currentPage = 1, int takeQuantity = 10)
         {
             try

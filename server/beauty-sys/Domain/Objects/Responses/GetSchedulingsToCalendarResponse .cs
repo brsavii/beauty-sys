@@ -4,16 +4,11 @@
     {
         public int Day { get; set; }
         public int? SchedulingId { get; set; }
-        public DailySchedule? DailySchedule { get; set; }
-    }
-
-    public record DailySchedule
-    {
-        public required CustomerBasicInfo CustomerBasicInfo { get; set; }
-        public required EmployeeBasicInfo EmployeeBasicInfo { get; set; }
-        public required ProcedureBasicInfo ProcedureBasicInfo { get; set; }
-        public virtual required SalonBasicInfo SalonBasicInfo { get; set; }
-        public virtual required PaymentBasicInfo PaymentBasicInfo { get; set; }
+        public CustomerBasicInfo? CustomerBasicInfo { get; set; }
+        public EmployeeBasicInfo? EmployeeBasicInfo { get; set; }
+        public ProcedureBasicInfo? ProcedureBasicInfo { get; set; }
+        public SalonBasicInfo? SalonBasicInfo { get; set; }
+        public PaymentBasicInfo? PaymentBasicInfo { get; set; }
     }
 
     public record SalonBasicInfo
