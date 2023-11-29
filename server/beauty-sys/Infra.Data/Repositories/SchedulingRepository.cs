@@ -28,13 +28,13 @@ namespace Infra.Data.Repositories
                 query = query.Where(s => s.CustomerId == customerId.Value);
 
             if (employeeId.HasValue)
-                query = query.Where(s => s.CustomerId == employeeId.Value);
+                query = query.Where(s => s.EmployeeId == employeeId.Value);
 
             if (procedureId.HasValue)
-                query = query.Where(s => s.CustomerId == procedureId.Value);
+                query = query.Where(s => s.ProcedureId == procedureId.Value);
 
             if (salonId.HasValue)
-                query = query.Where(s => s.CustomerId == salonId.Value);
+                query = query.Where(s => s.SalonId == salonId.Value);
 
             return _mapper.ProjectTo<GetSchedulingsToCalendarResponse>(query);
         }

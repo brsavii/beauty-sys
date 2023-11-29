@@ -31,7 +31,7 @@ namespace Domain.Services
         public async Task SaveScheduling(CreateSchedulingRequest createSchedulingRequest)
         {
             if (await _schedulingRepository.HasAnyConflict(createSchedulingRequest))
-                throw new InvalidOperationException("Existe um uncionário ou cliente em conflito com esses horários");
+                throw new InvalidOperationException("Existe um funcionário ou cliente em conflito com esses horários");
 
             var customer = await _customerRepository.GetById(createSchedulingRequest.CustomerId)
                 ?? throw new InvalidOperationException("Nenhum cliente encontrado");
@@ -90,7 +90,7 @@ namespace Domain.Services
             var employeeIdToCheck = updateSchedulingRequest.EmployeeId ?? scheduling.EmployeeId;
 
             if (await _schedulingRepository.HasAnyConflict(startDateTimeToCheck, scheduling.SchedulingId, customerIdToCheck, employeeIdToCheck))
-                throw new InvalidOperationException("Existe um uncionário ou cliente em conflito com esses horários");
+                throw new InvalidOperationException("Existe um funcionário ou cliente em conflito com esses horários");
 
             if (updateSchedulingRequest.CustomerId.HasValue)
             {
@@ -151,7 +151,7 @@ namespace Domain.Services
         private static ICollection<int> GetDaysInMonth(int month, int year)
         {
             if (month < 1 || month > 12)
-                throw new ArgumentException("O mês deve estar entre 1 e 12.", nameof(month));
+                throw new ArgumentException("O mês deve estar entre 1 e 12");
 
             ICollection<int> daysInMonth = new List<int>();
 
